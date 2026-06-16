@@ -4,9 +4,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>空華電脳幇</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-  <h1>空華電脳幇</h1>
-  <p>Vercel初回デプロイ確認用ページです。</p>
+  <main class="site">
+    <section class="hero">
+      <div class="hero-image" style="background-image: url('assets/images/header.webp');"></div>
+
+      <div class="bio">
+        <h1 class="site-title">空華電脳幇</h1>
+        <p class="site-subtitle">
+          電脳の片隅にある、空華椿祈の個人SNS風サイト。
+        </p>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab" data-tab="about">About</button>
+      <button class="tab" data-tab="all">All</button>
+      <button class="tab" data-tab="post">Post</button>
+      <button class="tab" data-tab="notice">Notice</button>
+      <button class="tab" data-tab="stream">Stream</button>
+      <button class="tab" data-tab="archive">Archive</button>
+    </nav>
+
+    <section id="about" class="panel">
+      <div class="card">
+        <div class="social-links">
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Twitch"><i class="fa-brands fa-twitch"></i></a>
+          <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-button">
+              Profile
+              <i class="fa-solid fa-angle-down"></i>
+            </button>
+            <div class="accordion-content">
+              <p>プロフィール本文が入ります。</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-button">
+              Contact
+              <i class="fa-solid fa-angle-down"></i>
+            </button>
+            <div class="accordion-content">
+              <p>お問い合わせ情報が入ります。</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-button">
+              Rule
+              <i class="fa-solid fa-angle-down"></i>
+            </button>
+            <div class="accordion-content">
+              <p>サイト利用ルールが入ります。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="all" class="panel">
+      <article class="card">
+        <div class="card-meta">POST-000001 / 2026/06/16</div>
+        <div class="card-body">ここにAllタブの投稿一覧が入ります。</div>
+      </article>
+    </section>
+
+    <section id="post" class="panel">
+      <article class="card">
+        <div class="card-meta">Post</div>
+        <div class="card-body">通常投稿が入ります。</div>
+      </article>
+    </section>
+
+    <section id="notice" class="panel">
+      <article class="card">
+        <span class="notice-label">告知</span>
+        <div class="card-body">Notice投稿が入ります。</div>
+      </article>
+    </section>
+
+    <section id="stream" class="panel">
+      <article class="card">
+        <div class="card-meta">Stream</div>
+        <div class="card-body">配信予定・配信中情報が入ります。</div>
+      </article>
+    </section>
+
+    <section id="archive" class="panel">
+      <div class="empty">Archiveは後で実装します。</div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
