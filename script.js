@@ -1,3 +1,5 @@
+const SITE_CONFIG_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=siteConfig';
+
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
 
@@ -26,6 +28,45 @@ function moveToHash(tabName) {
   activateTab(tabName);
 }
 
+async function loadSiteConfig() {
+  try {
+    const response = await fetch(SITE_CONFIG_API_URL);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      console.error(result.message);
+      return;
+    }
+
+    const config = result.siteConfig;
+
+    const siteTitle = document.querySelector('.site-title');
+    const siteSubtitle = document.querySelector('.site-subtitle');
+
+    if (siteTitle) {
+      siteTitle.textContent = config.siteTitle || '空華電脳幇';
+      document.title = config.siteTitle || '空華電脳幇';
+    }
+
+    if (siteSubtitle) {
+      siteSubtitle.innerHTML = config.bioHtml || '';
+    }
+
+    if (config.maintenanceMode === true) {
+      document.body.innerHTML = `
+        <main class="site">
+          <section class="card">
+            <h1 class="site-title">メンテナンス中</h1>
+            <p class="site-subtitle">${config.maintenanceMessage || '現在メンテナンス中です。'}</p>
+          </section>
+        </main>
+      `;
+    }
+  } catch (error) {
+    console.error('Site_Config load failed:', error);
+  }
+}
+
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     moveToHash(tab.dataset.tab);
@@ -44,3 +85,4 @@ document.querySelectorAll('.accordion-button').forEach(button => {
 });
 
 activateTab(getCurrentTab());
+loadSiteConfig();
