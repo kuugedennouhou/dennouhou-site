@@ -43,9 +43,10 @@ async function loadSiteConfig() {
     const siteTitle = document.querySelector('.site-title');
     const siteSubtitle = document.querySelector('.site-subtitle');
 
+    document.title = config.siteTitle || '空華電脳幇';
+
     if (siteTitle) {
       siteTitle.textContent = config.siteTitle || '空華電脳幇';
-      document.title = config.siteTitle || '空華電脳幇';
     }
 
     if (siteSubtitle) {
