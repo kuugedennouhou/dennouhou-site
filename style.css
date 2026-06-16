@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
+
+:root {
+  --bg: #010915;
+  --text: #F0F0F0;
+  --primary: #5D20B9;
+  --secondary: #143E4F;
+  --subtext: #9FB1C5;
+  --success: #2E8B57;
+  --warning: #D9A441;
+  --danger: #B23A48;
+
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(159, 177, 197, 0.16);
+  --shadow-purple: rgba(93, 32, 185, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(93, 32, 185, 0.22), transparent 32%),
+    radial-gradient(circle at top right, rgba(20, 62, 79, 0.3), transparent 30%),
+    var(--bg);
+  color: var(--text);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--subtext);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--text);
+}
+
+.site {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.hero {
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 28px rgba(93, 32, 185, 0.18);
+}
+
+.hero-image {
+  width: 100%;
+  min-height: 180px;
+  background:
+    linear-gradient(135deg, rgba(93, 32, 185, 0.4), rgba(20, 62, 79, 0.35)),
+    url('');
+  background-size: cover;
+  background-position: center;
+}
+
+.bio {
+  padding: 20px;
+}
+
+.site-title {
+  margin: 0 0 8px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: clamp(28px, 5vw, 48px);
+  letter-spacing: 0.06em;
+}
+
+.site-subtitle {
+  margin: 0;
+  color: var(--subtext);
+  line-height: 1.8;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 20px 0;
+  padding-bottom: 6px;
+}
+
+.tab {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  color: var(--subtext);
+  background: rgba(255, 255, 255, 0.025);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 700;
+}
+
+.tab.active,
+.tab:hover {
+  color: var(--text);
+  border-color: rgba(93, 32, 185, 0.75);
+  box-shadow: 0 0 14px var(--shadow-purple);
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
+
+.card {
+  margin-bottom: 16px;
+  padding: 18px;
+  border: 1px solid var(--card-border);
+  border-left: 3px solid var(--primary);
+  border-radius: 18px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px var(--shadow-purple);
+}
+
+.card-meta {
+  color: var(--subtext);
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.card-body {
+  line-height: 1.85;
+  white-space: pre-wrap;
+}
+
+.notice-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(20, 62, 79, 0.75);
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.social-links a {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--card-border);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 18px;
+}
+
+.accordion {
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+}
+
+.accordion-item + .accordion-item {
+  border-top: 1px solid var(--card-border);
+}
+
+.accordion-button {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-content {
+  display: none;
+  padding: 0 16px 16px;
+  color: var(--subtext);
+  line-height: 1.8;
+}
+
+.accordion-item.open .accordion-content {
+  display: block;
+}
+
+.accordion-item.open .accordion-button i {
+  transform: rotate(180deg);
+}
+
+.accordion-button i {
+  transition: transform 0.18s ease;
+}
+
+.empty {
+  color: var(--subtext);
+  text-align: center;
+  padding: 40px 0;
+}
+
+@media (max-width: 640px) {
+  .site {
+    padding: 14px 12px 48px;
+  }
+
+  .hero {
+    border-radius: 18px;
+  }
+
+  .bio {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+}
