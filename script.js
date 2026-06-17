@@ -99,7 +99,23 @@ async function loadAbout() {
       return;
     }
 
-    console.log('About Loaded', result.about);
+    const about = result.about;
+
+    const setHtml = (id, html, fallback = '<p>調整中</p>') => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.innerHTML = html || fallback;
+      }
+    };
+
+    setHtml('about-links', about.linksHtml);
+    setHtml('about-profile', about.profileHtml);
+    setHtml('about-hashtags', about.hashtagsHtml);
+    setHtml('about-activities', about.activitiesHtml);
+    setHtml('about-contact', about.contactHtml);
+    setHtml('about-rule', about.ruleHtml);
+    setHtml('about-faq', about.faqHtml);
+    setHtml('about-privacy-policy', about.privacyPolicyHtml);
 
   } catch (error) {
     console.error('About load failed:', error);
