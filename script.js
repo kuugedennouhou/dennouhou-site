@@ -88,7 +88,7 @@ document.querySelectorAll('.accordion-button').forEach(button => {
 activateTab(getCurrentTab());
 loadSiteConfig();
 
-const ABOUT_API_URL = 'あなたのGASのURL?mode=about';
+const ABOUT_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=about';
 
 async function loadAbout() {
   try {
