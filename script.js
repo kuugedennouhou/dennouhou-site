@@ -87,3 +87,23 @@ document.querySelectorAll('.accordion-button').forEach(button => {
 
 activateTab(getCurrentTab());
 loadSiteConfig();
+
+const ABOUT_API_URL = 'あなたのGASのURL?mode=about';
+
+async function loadAbout() {
+  try {
+    const response = await fetch(ABOUT_API_URL);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    console.log('About Loaded', result.about);
+
+  } catch (error) {
+    console.error('About load failed:', error);
+  }
+}
+
+loadAbout();
