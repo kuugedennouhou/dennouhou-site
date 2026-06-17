@@ -241,3 +241,13 @@ a:hover {
     padding: 15px;
   }
 }
+
+.about-divider {
+  height: 1px;
+  margin: 18px 0;
+  background: rgba(159, 177, 197, 0.18);
+}
+
+.about-card {
+  border-left-color: var(--secondary);
+}
