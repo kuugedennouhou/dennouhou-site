@@ -255,5 +255,10 @@ a:hover {
 .about-heading {
   border-left: 3px solid var(--secondary);
   padding-left: 10px;
-  font-weight: 700;
+}
+
+.about-note {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 12px;
 }
