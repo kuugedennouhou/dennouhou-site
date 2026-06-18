@@ -53,6 +53,22 @@ async function loadSiteConfig() {
       siteSubtitle.innerHTML = config.bioHtml || '';
     }
 
+    const xLink = document.querySelector('[data-social="x"]');
+    const twitchLink = document.querySelector('[data-social="twitch"]');
+    const youtubeLink = document.querySelector('[data-social="youtube"]');
+
+    if (xLink && config.xUrl) {
+      xLink.href = config.xUrl;
+    }
+
+    if (twitchLink && config.twitchUrl) {
+      twitchLink.href = config.twitchUrl;
+    }
+
+    if (youtubeLink && config.youtubeUrl) {
+      youtubeLink.href = config.youtubeUrl;
+    }
+    
     if (config.maintenanceMode === true) {
       document.body.innerHTML = `
         <main class="site">
