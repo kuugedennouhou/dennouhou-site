@@ -251,3 +251,9 @@ a:hover {
 .about-card {
   border-left-color: var(--secondary);
 }
+
+.about-heading {
+  border-left: 3px solid var(--secondary);
+  padding-left: 10px;
+  font-weight: 700;
+}
