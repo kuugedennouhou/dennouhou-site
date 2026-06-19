@@ -268,3 +268,19 @@ a:hover {
   opacity: 0.8;
   margin-top: 12px;
 }
+
+.pinned-card {
+  border-left-color: var(--accent);
+  background: linear-gradient(
+    135deg,
+    rgba(93, 32, 185, 0.16),
+    rgba(255, 255, 255, 0.035)
+  );
+}
+
+.pinned-label {
+  font-size: 0.85rem;
+  color: #f4f1b5;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
