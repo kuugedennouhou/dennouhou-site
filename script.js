@@ -139,3 +139,62 @@ async function loadAbout() {
 }
 
 loadAbout();
+
+const POSTS_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=posts';
+
+async function loadPosts() {
+  try {
+    const response = await fetch(POSTS_API_URL);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    const allPanel = document.getElementById('all');
+    if (!allPanel) return;
+
+    allPanel.innerHTML = '';
+
+    result.posts.forEach(post => {
+      const article = document.createElement('article');
+      article.className = 'card';
+
+      article.innerHTML = `
+        <div class="card-meta">${post.postId || ''} / ${formatDate(post.createdAt)}</div>
+        <div class="card-body">${escapeHtml(post.content || '')}</div>
+      `;
+
+      allPanel.appendChild(article);
+    });
+
+  } catch (error) {
+    console.error('Posts load failed:', error);
+  }
+}
+
+function formatDate(value) {
+  if (!value) return '';
+
+  const date = new Date(value);
+  if (isNaN(date.getTime())) return '';
+
+  return date.toLocaleString('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+loadPosts();
