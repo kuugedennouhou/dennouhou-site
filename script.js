@@ -235,7 +235,7 @@ function createPostCard(post, isPinned = false) {
   article.className = isPinned ? 'card pinned-card' : 'card';
 
   article.innerHTML = `
-    ${isPinned ? '<div class="pinned-label" title="固定投稿">📌</div>' : ''}
+    ${isPinned ? '<div class="pinned-label">📌</div>' : ''}
     <div class="card-meta">${post.postId || ''} / ${formatDate(post.createdAt)}</div>
     <div class="card-body">${escapeHtml(post.content || '')}</div>
   `;
