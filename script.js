@@ -198,3 +198,47 @@ function escapeHtml(value) {
 }
 
 loadPosts();
+
+async function loadPosts() {
+  try {
+    const response = await fetch(POSTS_API_URL);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    const allPanel = document.getElementById('all');
+    if (!allPanel) return;
+
+    allPanel.innerHTML = '';
+
+    const posts = result.posts || [];
+    const pinnedPost = posts.find(post => post.pinned === true);
+    const normalPosts = posts.filter(post => post.pinned !== true);
+
+    if (pinnedPost) {
+      allPanel.appendChild(createPostCard(pinnedPost, true));
+    }
+
+    normalPosts.forEach(post => {
+      allPanel.appendChild(createPostCard(post, false));
+    });
+
+  } catch (error) {
+    console.error('Posts load failed:', error);
+  }
+}
+
+function createPostCard(post, isPinned = false) {
+  const article = document.createElement('article');
+  article.className = isPinned ? 'card pinned-card' : 'card';
+
+  article.innerHTML = `
+    ${isPinned ? '<div class="pinned-label">📌 固定投稿</div>' : ''}
+    <div class="card-meta">${post.postId || ''} / ${formatDate(post.createdAt)}</div>
+    <div class="card-body">${escapeHtml(post.content || '')}</div>
+  `;
+
+  return article;
+}
