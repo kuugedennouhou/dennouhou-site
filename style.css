@@ -284,3 +284,7 @@ a:hover {
   margin-bottom: 8px;
   font-weight: 700;
 }
+
+.card-body {
+  white-space: pre-wrap;
+}
