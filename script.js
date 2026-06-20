@@ -261,3 +261,44 @@ function getNoticeLabel(post) {
 
   return `<div class="notice-badge">${escapeHtml(label)}</div>`;
 }
+
+function getStreamLabel(post) {
+  if (post.tabType !== 'Stream') {
+    return '';
+  }
+
+  let label = '';
+
+  if (post.streamType === 'Twitch') {
+    label = '🟣 Twitch';
+  }
+
+  if (post.streamType === 'YouTube') {
+    switch (post.streamContentType) {
+      case 'Live':
+        label = '🔴 YouTube Live';
+        break;
+
+      case '動画':
+        label = '🎬 YouTube 動画';
+        break;
+
+      case 'Shorts':
+        label = '📱 YouTube Shorts';
+        break;
+
+      default:
+        label = '🔴 YouTube';
+    }
+  }
+
+  if (!label) {
+    return '';
+  }
+
+  return `
+    <div class="stream-badge">
+      ${label}
+    </div>
+  `;
+}
