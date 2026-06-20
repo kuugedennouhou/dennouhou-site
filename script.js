@@ -240,6 +240,7 @@ const streamLabel = getStreamLabel(post);
 article.innerHTML = `
   ${isPinned ? '<div class="pinned-label">📌</div>' : ''}
   ${noticeLabel}
+  ${streamLabel}
   <div class="card-meta">${post.postId || ''} / ${formatDate(post.createdAt)}</div>
   <div class="card-body">${escapeHtml(post.content || '')}</div>
 `;
