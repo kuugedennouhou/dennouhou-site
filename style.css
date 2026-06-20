@@ -321,16 +321,19 @@ a:hover {
 
 .post-images {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
   margin-top: 14px;
 }
 
+.post-images a {
+  display: block;
+}
+
 .post-images img {
-  max-width: 320px;
-  max-height: 320px;
-  width: auto;
+  width: 50%;
+  max-width: 500px;
   height: auto;
   border-radius: 14px;
   border: 1px solid var(--card-border);
+  display: block;
 }
