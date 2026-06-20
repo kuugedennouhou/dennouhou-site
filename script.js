@@ -235,6 +235,7 @@ function createPostCard(post, isPinned = false) {
   article.className = isPinned ? 'card pinned-card' : 'card';
 
 const noticeLabel = getNoticeLabel(post);
+const streamLabel = getStreamLabel(post);  
 
 article.innerHTML = `
   ${isPinned ? '<div class="pinned-label">📌</div>' : ''}
