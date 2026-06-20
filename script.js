@@ -245,3 +245,17 @@ article.innerHTML = `
 
   return article;
 }
+
+function getNoticeLabel(post) {
+  if (post.tabType !== 'Notice') {
+    return '';
+  }
+
+  const label = post.noticeStatus || post.customNoticeLabel;
+
+  if (!label) {
+    return '';
+  }
+
+  return `<div class="notice-badge">${escapeHtml(label)}</div>`;
+}
