@@ -234,11 +234,14 @@ function createPostCard(post, isPinned = false) {
   const article = document.createElement('article');
   article.className = isPinned ? 'card pinned-card' : 'card';
 
-  article.innerHTML = `
-    ${isPinned ? '<div class="pinned-label">📌</div>' : ''}
-    <div class="card-meta">${post.postId || ''} / ${formatDate(post.createdAt)}</div>
-    <div class="card-body">${escapeHtml(post.content || '')}</div>
-  `;
+const noticeLabel = getNoticeLabel(post);
+
+article.innerHTML = `
+  ${isPinned ? '<div class="pinned-label">📌</div>' : ''}
+  ${noticeLabel}
+  <div class="card-meta">${post.postId || ''} / ${formatDate(post.createdAt)}</div>
+  <div class="card-body">${escapeHtml(post.content || '')}</div>
+`;
 
   return article;
 }
