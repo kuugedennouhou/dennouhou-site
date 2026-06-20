@@ -318,3 +318,18 @@ a:hover {
   font-size: 0.8rem;
   font-weight: 700;
 }
+
+.post-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.post-images img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+}
