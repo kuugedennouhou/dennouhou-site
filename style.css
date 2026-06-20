@@ -314,7 +314,7 @@ a:hover {
   background: rgba(140, 110, 255, 0.12);
   border: 1px solid rgba(140, 110, 255, 0.35);
 
-  color: #d7c7ff;
+  color: var(--text-color)
   font-size: 0.8rem;
   font-weight: 700;
 }
