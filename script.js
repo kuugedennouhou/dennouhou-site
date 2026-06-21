@@ -391,11 +391,18 @@ function initLightbox() {
       return;
     }
 
+    event.preventDefault();
+    event.stopPropagation();
+
     lightboxImage.src = image.dataset.full || image.src;
     lightbox.classList.add('active');
   });
 
-  lightbox.addEventListener('click', () => {
+  lightbox.addEventListener('click', event => {
+    if (event.target !== lightbox) {
+      return;
+    }
+
     lightbox.classList.remove('active');
     lightboxImage.src = '';
   });
