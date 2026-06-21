@@ -279,7 +279,21 @@ function getPostDateHtml(post) {
     return created;
   }
 
-  return `${created}（✎ ${updated}）`;
+  return `${created}<br>✎ ${updated}`;
+}
+
+function isSameMinute(dateA, dateB) {
+  const a = new Date(dateA);
+  const b = new Date(dateB);
+
+  if (isNaN(a.getTime()) || isNaN(b.getTime())) {
+    return true;
+  }
+
+  a.setSeconds(0, 0);
+  b.setSeconds(0, 0);
+
+  return a.getTime() === b.getTime();
 }
 
 function formatDate(value) {
