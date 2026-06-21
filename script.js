@@ -279,7 +279,7 @@ function getPostDateHtml(post) {
     return created;
   }
 
-  return `${created}<br>✎ ${updated}`;
+  return `${created}（✎ ${updated}）`;
 }
 
 function isSameMinute(dateA, dateB) {
