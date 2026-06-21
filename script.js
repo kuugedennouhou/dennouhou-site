@@ -151,26 +151,47 @@ async function loadPosts() {
       return;
     }
 
-    const allPanel = document.getElementById('all');
-    if (!allPanel) return;
-
-    allPanel.innerHTML = '';
-
     const posts = result.posts || [];
-    const pinnedPost = posts.find(post => post.pinned === true);
-    const normalPosts = posts.filter(post => post.pinned !== true);
 
-    if (pinnedPost) {
-      allPanel.appendChild(createPostCard(pinnedPost, true));
-    }
-
-    normalPosts.forEach(post => {
-      allPanel.appendChild(createPostCard(post, false));
-    });
+    renderPostsToPanel('all', posts, true);
+    renderPostsToPanel('post', posts.filter(post => post.tabType === 'Post'), false);
+    renderPostsToPanel('notice', posts.filter(post => post.tabType === 'Notice'), false);
+    renderPostsToPanel('stream', posts.filter(post => post.tabType === 'Stream'), false);
 
   } catch (error) {
     console.error('Posts load failed:', error);
   }
+}
+
+function renderPostsToPanel(panelId, posts, usePinned = false) {
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+
+  panel.innerHTML = '';
+
+  if (!posts.length) {
+    panel.innerHTML = '<div class="empty">投稿はまだありません。</div>';
+    return;
+  }
+
+  if (usePinned) {
+    const pinnedPost = posts.find(post => post.pinned === true);
+    const normalPosts = posts.filter(post => post.pinned !== true);
+
+    if (pinnedPost) {
+      panel.appendChild(createPostCard(pinnedPost, true));
+    }
+
+    normalPosts.forEach(post => {
+      panel.appendChild(createPostCard(post, false));
+    });
+
+    return;
+  }
+
+  posts.forEach(post => {
+    panel.appendChild(createPostCard(post, false));
+  });
 }
 
 function createPostCard(post, isPinned = false) {
