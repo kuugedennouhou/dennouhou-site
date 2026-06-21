@@ -316,6 +316,32 @@ a:hover {
   font-weight: 700;
 }
 
+.notice-告知 {
+  color: #ffd36a;
+  border-color: rgba(255, 211, 106, 0.45);
+  background: rgba(255, 211, 106, 0.12);
+}
+
+.notice-注意 {
+  color: #90D7EC;
+  border-color: rgba(144, 215, 236, 0.45);
+  background: rgba(144, 215, 236, 0.12);
+}
+
+.notice-重要 {
+  color: #FF3399;
+  border-color: rgba(255, 51, 153, 0.45);
+  background: rgba(255, 51, 153, 0.12);
+}
+
+.notice-アップデート,
+.notice-スケジュール,
+.notice-その他 {
+  color: #F6F5EA;
+  border-color: rgba(246, 245, 234, 0.35);
+  background: rgba(246, 245, 234, 0.08);
+}
+
 .stream-badge {
   display: inline-block;
   margin-bottom: 10px;
