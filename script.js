@@ -391,7 +391,7 @@ function initLightbox() {
       return;
     }
 
-    lightboxImage.src = image.src;
+    lightboxImage.src = image.dataset.full || image.src;
     lightbox.classList.add('active');
   });
 
