@@ -25,6 +25,7 @@ body {
     radial-gradient(circle at top left, rgba(93, 32, 185, 0.22), transparent 32%),
     radial-gradient(circle at top right, rgba(20, 62, 79, 0.3), transparent 30%),
     var(--bg);
+  background-attachment: fixed;
   color: var(--text);
   font-family: 'Zen Kaku Gothic New', sans-serif;
   min-height: 100vh;
