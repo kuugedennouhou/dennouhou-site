@@ -88,9 +88,8 @@ a:hover {
 
 .tabs {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
-  overflow-x: hidden;
+  overflow-x: auto;
   margin: 20px 0;
   padding-bottom: 6px;
 }
