@@ -185,7 +185,7 @@ function createPostCard(post, isPinned = false) {
     ${isPinned ? '<div class="pinned-label">📌</div>' : ''}
     ${noticeLabel}
     ${streamLabel}
-    <div class="card-meta">${post.postId || ''} / ${formatDate(post.createdAt)}</div>
+    <div class="card-meta">${getPostDateHtml(post)}</div>
     <div class="card-body">${escapeHtml(post.content || '')}</div>
     ${imagesHtml}
   `;
@@ -265,6 +265,35 @@ function getPostImagesHtml(post) {
       `).join('')}
     </div>
   `;
+}
+
+function getPostDateHtml(post) {
+  const created = formatDate(post.createdAt);
+  const updated = formatDate(post.updatedAt);
+
+  if (!created) {
+    return '';
+  }
+
+  if (!updated || isSameMinute(post.createdAt, post.updatedAt)) {
+    return created;
+  }
+
+  return `${created}<br>✎ ${updated}`;
+}
+
+function isSameMinute(dateA, dateB) {
+  const a = new Date(dateA);
+  const b = new Date(dateB);
+
+  if (isNaN(a.getTime()) || isNaN(b.getTime())) {
+    return true;
+  }
+
+  a.setSeconds(0, 0);
+  b.setSeconds(0, 0);
+
+  return a.getTime() === b.getTime();
 }
 
 function formatDate(value) {
