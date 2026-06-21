@@ -405,7 +405,7 @@ a:hover {
 /* 予定・アーカイブ */
 .stream-status-予定,
 .stream-status-アーカイブ {
-  color: #010915;
+  color: #F6F5EA;
   background: rgba(246, 245, 234, 0.25);
   border: 1px solid rgba(246, 245, 234, 0.45);
 }
@@ -420,7 +420,7 @@ a:hover {
 /* 延期・中止 */
 .stream-status-延期,
 .stream-status-中止 {
-  color: #010915;
+  color: #90D7EC;
   background: rgba(144, 215, 236, 0.25);
   border: 1px solid rgba(144, 215, 236, 0.45);
 }
