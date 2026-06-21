@@ -35,6 +35,11 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
 a {
   color: var(--subtext);
   text-decoration: none;
