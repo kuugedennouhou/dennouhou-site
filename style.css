@@ -30,6 +30,11 @@ body {
   min-height: 100vh;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 a {
   color: var(--subtext);
   text-decoration: none;
