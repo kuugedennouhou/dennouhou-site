@@ -463,3 +463,10 @@ a:hover {
 
   object-fit: contain;
 }
+
+.post-image-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
