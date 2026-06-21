@@ -20,6 +20,7 @@
 }
 
 body {
+  overflow-x: hidden;
   margin: 0;
   background:
     radial-gradient(circle at top left, rgba(93, 32, 185, 0.22), transparent 32%),
@@ -83,8 +84,9 @@ a:hover {
 
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  overflow-x: auto;
+  overflow-x: hidden;
   margin: 20px 0;
   padding-bottom: 6px;
 }
@@ -314,7 +316,7 @@ a:hover {
   background: rgba(140, 110, 255, 0.12);
   border: 1px solid rgba(140, 110, 255, 0.35);
 
-  color: (--text);
+  color: var(--text);
   font-size: 0.8rem;
   font-weight: 700;
 }
