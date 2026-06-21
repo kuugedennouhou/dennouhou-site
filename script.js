@@ -227,7 +227,11 @@ function getNoticeLabel(post) {
     return '';
   }
 
-  return `<div class="notice-badge">${escapeHtml(label)}</div>`;
+  return `
+    <div class="notice-badge notice-${label}">
+      ${escapeHtml(label)}
+    </div>
+  `;
 }
 
 function getStreamLabel(post) {
