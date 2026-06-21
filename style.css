@@ -385,3 +385,45 @@ a:hover {
     width: 80%;
   }
 }
+
+.stream-label-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stream-status {
+  display: inline-block;
+  padding: 4px 10px;
+
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* 配信予定・アーカイブ */
+
+.stream-status-配信予定,
+.stream-status-アーカイブ {
+  color: #F6F5EA;
+  border: 1px solid rgba(246,245,234,0.35);
+  background: rgba(246,245,234,0.08);
+}
+
+/* 配信中 */
+
+.stream-status-配信中 {
+  color: #FF3399;
+  border: 1px solid rgba(255,51,153,0.45);
+  background: rgba(255,51,153,0.12);
+}
+
+/* 延期・中止 */
+
+.stream-status-延期,
+.stream-status-中止 {
+  color: #90D7EC;
+  border: 1px solid rgba(144,215,236,0.45);
+  background: rgba(144,215,236,0.12);
+}
