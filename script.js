@@ -360,10 +360,6 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
-loadPosts();
-
-loadArchivePosts();
-
 async function loadArchivePosts() {
   try {
     const response = await fetch(ARCHIVE_API_URL);
@@ -379,3 +375,32 @@ async function loadArchivePosts() {
     console.error('Archive load failed:', error);
   }
 }
+
+function initLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+
+  if (!lightbox || !lightboxImage) {
+    return;
+  }
+
+  document.addEventListener('click', event => {
+    const image = event.target.closest('.post-images img');
+
+    if (!image) {
+      return;
+    }
+
+    lightboxImage.src = image.src;
+    lightbox.classList.add('active');
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+    lightboxImage.src = '';
+  });
+}
+
+loadPosts();
+loadArchivePosts();
+initLightbox();
