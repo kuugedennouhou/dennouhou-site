@@ -142,6 +142,8 @@ loadAbout();
 
 const POSTS_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=posts';
 
+const ARCHIVE_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=archive';
+
 async function loadPosts() {
   try {
     const response = await fetch(POSTS_API_URL);
@@ -342,3 +344,21 @@ function escapeHtml(value) {
 }
 
 loadPosts();
+
+loadArchivePosts();
+
+async function loadArchivePosts() {
+  try {
+    const response = await fetch(ARCHIVE_API_URL);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    renderPostsToPanel('archive', result.posts || [], false);
+
+  } catch (error) {
+    console.error('Archive load failed:', error);
+  }
+}
