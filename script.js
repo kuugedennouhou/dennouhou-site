@@ -300,7 +300,7 @@ function getPostImagesHtml(post) {
     <div class="post-images">
       ${images.map(url => `
         <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">
-          <img src="${escapeHtml(url)}" alt="投稿画像" loading="lazy">
+          <img src="${escapeHtml(url)}?tr=f-webp" alt="投稿画像" loading="lazy">
         </a>
       `).join('')}
     </div>
