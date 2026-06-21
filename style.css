@@ -371,11 +371,17 @@ a:hover {
   margin-top: 14px;
 }
 
-.post-images a {
+.post-image-button {
   display: flex;
   justify-content: center;
   width: 50%;
   max-width: 500px;
+
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  cursor: zoom-in;
 }
 
 .post-images img {
@@ -389,7 +395,7 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  .post-images a {
+  .post-image-button {
     width: 80%;
   }
 }
