@@ -239,38 +239,51 @@ function getStreamLabel(post) {
     return '';
   }
 
-  let label = '';
+  let streamLabel = '';
+  let statusLabel = '';
+
+  if (
+    post.streamType === 'Twitch' ||
+    (post.streamType === 'YouTube' && post.streamContentType === 'Live')
+  ) {
+    if (post.streamStatus) {
+      statusLabel = `
+        <div class="stream-status stream-status-${post.streamStatus}">
+          ${escapeHtml(post.streamStatus)}
+        </div>
+      `;
+    }
+  }
 
   if (post.streamType === 'Twitch') {
-    label = '🟣 Twitch';
+    streamLabel = '🟣 Twitch';
   }
 
   if (post.streamType === 'YouTube') {
     switch (post.streamContentType) {
       case 'Live':
-        label = '🔴 YouTube Live';
+        streamLabel = '🔴 YouTube Live';
         break;
 
       case '動画':
-        label = '🎬 YouTube 動画';
+        streamLabel = '🎬 YouTube 動画';
         break;
 
       case 'Shorts':
-        label = '📱 YouTube Shorts';
+        streamLabel = '📱 YouTube Shorts';
         break;
 
       default:
-        label = '🔴 YouTube';
+        streamLabel = '🔴 YouTube';
     }
   }
 
-  if (!label) {
-    return '';
-  }
-
   return `
-    <div class="stream-badge">
-      ${label}
+    <div class="stream-label-group">
+      ${statusLabel}
+      <div class="stream-badge">
+        ${streamLabel}
+      </div>
     </div>
   `;
 }
