@@ -243,9 +243,9 @@ function getStreamLabel(post) {
   let statusLabel = '';
 
   if (
-    post.streamType === 'Twitch' ||
-    (post.streamType === 'YouTube' && post.streamContentType === 'Live')
-  ) {
+  post.streamType === 'Twitch' ||
+  (post.streamType === 'YouTube' && ['Live', 'ライブ', 'YouTube Live'].includes(post.streamContentType))
+) {
     if (post.streamStatus) {
       statusLabel = `
         <div class="stream-status stream-status-${post.streamStatus}">
