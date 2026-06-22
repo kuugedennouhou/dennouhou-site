@@ -301,6 +301,7 @@ function getPostImagesHtml(post) {
       ${images.map(url => `
         <button class="post-image-button" type="button">
           <img
+            class="${post.imageSavePolicy === 'NG' ? 'protected-image' : ''}"
             src="${escapeHtml(url)}?tr=f-webp"
             data-full="${escapeHtml(url)}"
             data-save-policy="${escapeHtml(post.imageSavePolicy || 'NG')}"
