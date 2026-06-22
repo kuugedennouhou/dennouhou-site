@@ -417,6 +417,21 @@ function initLightbox() {
   });
 }
 
+function initImageProtection() {
+  document.addEventListener('contextmenu', event => {
+    if (event.target.closest('.post-images img, #lightbox-image')) {
+      event.preventDefault();
+    }
+  });
+
+  document.addEventListener('dragstart', event => {
+    if (event.target.closest('.post-images img, #lightbox-image')) {
+      event.preventDefault();
+    }
+  });
+}
+
 loadPosts();
 loadArchivePosts();
 initLightbox();
+initImageProtection();
