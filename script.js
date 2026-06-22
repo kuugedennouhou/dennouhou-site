@@ -379,8 +379,9 @@ async function loadArchivePosts() {
 function initLightbox() {
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image');
+  const lightboxClose = document.getElementById('lightbox-close');
 
-  if (!lightbox || !lightboxImage) {
+  if (!lightbox || !lightboxImage || !lightboxClose) {
     return;
   }
 
@@ -402,6 +403,14 @@ function initLightbox() {
     if (event.target !== lightbox) {
       return;
     }
+
+    lightbox.classList.remove('active');
+    lightboxImage.src = '';
+  });
+
+  lightboxClose.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
 
     lightbox.classList.remove('active');
     lightboxImage.src = '';
