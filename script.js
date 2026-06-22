@@ -300,7 +300,13 @@ function getPostImagesHtml(post) {
     <div class="post-images">
       ${images.map(url => `
         <button class="post-image-button" type="button">
-          <img src="${escapeHtml(url)}?tr=f-webp" data-full="${escapeHtml(url)}" alt="投稿画像" loading="lazy">
+          <img
+            src="${escapeHtml(url)}?tr=f-webp"
+            data-full="${escapeHtml(url)}"
+            data-save-policy="${escapeHtml(post.imageSavePolicy || 'NG')}"
+            alt="投稿画像"
+            loading="lazy"
+          >
         </button>
       `).join('')}
     </div>
@@ -396,6 +402,7 @@ function initLightbox() {
     event.stopPropagation();
 
     lightboxImage.src = image.dataset.full || image.src;
+    lightboxImage.dataset.savePolicy = image.dataset.savePolicy || 'NG';
     lightbox.classList.add('active');
   });
 
@@ -419,13 +426,17 @@ function initLightbox() {
 
 function initImageProtection() {
   document.addEventListener('contextmenu', event => {
-    if (event.target.closest('.post-images img, #lightbox-image')) {
+    const image = event.target.closest('.post-images img, #lightbox-image');
+
+    if (image && image.dataset.savePolicy === 'NG') {
       event.preventDefault();
     }
   });
 
   document.addEventListener('dragstart', event => {
-    if (event.target.closest('.post-images img, #lightbox-image')) {
+    const image = event.target.closest('.post-images img, #lightbox-image');
+
+    if (image && image.dataset.savePolicy === 'NG') {
       event.preventDefault();
     }
   });
