@@ -144,6 +144,9 @@ const POSTS_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UA
 
 const ARCHIVE_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=archive';
 
+const REACTIONS_API_URL =
+  'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=reactions';
+
 async function loadPosts() {
   try {
     const response = await fetch(POSTS_API_URL);
@@ -164,6 +167,8 @@ async function loadPosts() {
     console.error('Posts load failed:', error);
   }
 }
+
+let reactionsData = [];
 
 function renderPostsToPanel(panelId, posts, usePinned = false) {
   const panel = document.getElementById(panelId);
