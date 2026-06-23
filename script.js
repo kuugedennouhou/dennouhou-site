@@ -170,6 +170,8 @@ async function loadPosts() {
 
 let reactionsData = [];
 
+const REACTION_EMOJIS = ['🩷', '👀', '✨', '💦', '👍', '🙏', '🤣', '😭', '🥺', '😱', '🔥', '💤'];
+
 async function loadReactions() {
   try {
     const response = await fetch(REACTIONS_API_URL);
@@ -224,6 +226,7 @@ function createPostCard(post, isPinned = false) {
   const noticeLabel = getNoticeLabel(post);
   const streamLabel = getStreamLabel(post);
   const imagesHtml = getPostImagesHtml(post);
+  const reactionsHtml = getReactionsHtml(post);
 
   article.innerHTML = `
     ${isPinned ? '<div class="pinned-label">📌</div>' : ''}
@@ -232,9 +235,32 @@ function createPostCard(post, isPinned = false) {
     <div class="card-meta">${getPostDateHtml(post)}</div>
     <div class="card-body">${escapeHtml(post.content || '')}</div>
     ${imagesHtml}
+    ${reactionsHtml}
   `;
 
   return article;
+}
+
+function getReactionsHtml(post) {
+  const postId = post.postId;
+  if (!postId) return '';
+
+  return `
+    <div class="reactions">
+      ${REACTION_EMOJIS.map(emoji => {
+        const count = reactionsData.filter(reaction =>
+          reaction.postId === postId && reaction.emoji === emoji
+        ).length;
+
+        return `
+          <button class="reaction-button" type="button" data-post-id="${escapeHtml(postId)}" data-emoji="${emoji}">
+            <span>${emoji}</span>
+            <span>${count}</span>
+          </button>
+        `;
+      }).join('')}
+    </div>
+  `;
 }
 
 function getNoticeLabel(post) {
