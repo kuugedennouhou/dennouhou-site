@@ -506,10 +506,9 @@ function initImageProtection() {
   });
 }
 
-loadReactions().then(() => {
-  loadPosts();
-  loadArchivePosts();
-});
+loadReactions();
+loadPosts();
+loadArchivePosts();
 
 initLightbox();
 initImageProtection();
