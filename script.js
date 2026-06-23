@@ -245,20 +245,36 @@ function getReactionsHtml(post) {
   const postId = post.postId;
   if (!postId) return '';
 
+  const counts = {};
+
+  REACTION_EMOJIS.forEach(emoji => {
+    counts[emoji] = reactionsData.filter(reaction =>
+      reaction.postId === postId && reaction.emoji === emoji
+    ).length;
+  });
+
+  const activeEmojis = REACTION_EMOJIS.filter(emoji => counts[emoji] > 0);
+
+  const reactionButtonsHtml = activeEmojis.length
+    ? activeEmojis.map(emoji => `
+        <button class="reaction-button" type="button" data-post-id="${escapeHtml(postId)}" data-emoji="${emoji}">
+          <span class="reaction-emoji">${emoji}</span>
+          <span class="reaction-count">${counts[emoji]}</span>
+        </button>
+      `).join('')
+    : `
+        <button class="reaction-button reaction-heart-empty" type="button" data-post-id="${escapeHtml(postId)}" data-emoji="🩷">
+          <span class="reaction-emoji">🩷</span>
+        </button>
+      `;
+
   return `
     <div class="reactions">
-      ${REACTION_EMOJIS.map(emoji => {
-        const count = reactionsData.filter(reaction =>
-          reaction.postId === postId && reaction.emoji === emoji
-        ).length;
+      ${reactionButtonsHtml}
 
-        return `
-          <button class="reaction-button" type="button" data-post-id="${escapeHtml(postId)}" data-emoji="${emoji}">
-            <span>${emoji}</span>
-            <span>${count}</span>
-          </button>
-        `;
-      }).join('')}
+      <button class="reaction-plus-button" type="button" data-post-id="${escapeHtml(postId)}">
+        <i class="fa-solid fa-plus"></i>
+      </button>
     </div>
   `;
 }
