@@ -170,6 +170,22 @@ async function loadPosts() {
 
 let reactionsData = [];
 
+async function loadReactions() {
+  try {
+    const response = await fetch(REACTIONS_API_URL);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    reactionsData = result.reactions || [];
+
+  } catch (error) {
+    console.error('Reactions load failed:', error);
+  }
+}
+
 function renderPostsToPanel(panelId, posts, usePinned = false) {
   const panel = document.getElementById(panelId);
   if (!panel) return;
@@ -448,7 +464,10 @@ function initImageProtection() {
   });
 }
 
-loadPosts();
-loadArchivePosts();
+loadReactions().then(() => {
+  loadPosts();
+  loadArchivePosts();
+});
+
 initLightbox();
 initImageProtection();
