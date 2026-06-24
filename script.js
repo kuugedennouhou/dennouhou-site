@@ -244,7 +244,7 @@ function createPostCard(post, isPinned = false) {
 
 function getPostContentHtml(post) {
   const content = post.content || '';
-  const limit = 200;
+  const limit = 195;
 
   if (content.length <= limit) {
     return `<div class="card-body">${escapeHtml(content)}</div>`;
