@@ -245,6 +245,8 @@ function getReactionsHtml(post) {
   const postId = post.postId;
   if (!postId) return '';
 
+  const userId = getUserId();
+  
   const counts = {};
 
   REACTION_EMOJIS.forEach(emoji => {
@@ -257,7 +259,7 @@ function getReactionsHtml(post) {
 
   const reactionButtonsHtml = activeEmojis.length
     ? activeEmojis.map(emoji => `
-        <button class="reaction-button" type="button" data-post-id="${escapeHtml(postId)}" data-emoji="${emoji}">
+        <button class="reaction-button ${reactionsData.some(reaction => reaction.postId === postId && reaction.userId === userId && reaction.emoji === emoji) ? 'reacted' : ''}" type="button" data-post-id="${escapeHtml(postId)}" data-emoji="${emoji}">
           <span class="reaction-emoji">${emoji}</span>
           <span class="reaction-count">${counts[emoji]}</span>
         </button>
