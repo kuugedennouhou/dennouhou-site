@@ -596,6 +596,10 @@ function initReactionPicker() {
 
     await addReaction(postId, emoji);
   });
+  
+  window.addEventListener('scroll', () => {
+    picker.classList.remove('active');
+  });
 }  
 
 function initReactionButtons() {
