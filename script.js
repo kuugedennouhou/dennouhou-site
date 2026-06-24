@@ -247,12 +247,12 @@ function getPostContentHtml(post) {
   const limit = 200;
 
   if (content.length <= limit) {
-    return `<div class="card-body">${escapeHtml(content)}</div>`;
+    return `<div class="card-body">${linkify(escapeHtml(content))}</div>`;
   }
 
   const shortContent = content.slice(0, limit);
 
-  return `<div class="card-body"><span class="content-short">${escapeHtml(shortContent)}...</span><span class="content-full" hidden>${escapeHtml(content)}</span></div>
+  return `<div class="card-body"><span class="content-short">${linkify(escapeHtml(shortContent))}...</span><span class="content-full" hidden>${linkify(escapeHtml(content))}</span></div>
   <button class="read-more-button" type="button">続きを読む</button>`;
   }
 
@@ -445,6 +445,13 @@ function escapeHtml(value) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#039;');
+}
+
+function linkify(text) {
+  return text.replace(
+    /(https?:\/\/[^\s]+)/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+  );
 }
 
 function getUserId() {
