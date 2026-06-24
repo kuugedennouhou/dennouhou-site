@@ -656,6 +656,37 @@ function initReactionButtons() {
   });
 }
 
+function initReadMore() {
+  document.addEventListener('click', event => {
+    const button = event.target.closest('.read-more-button');
+
+    if (!button) {
+      return;
+    }
+
+    const card = button.closest('.card');
+
+    const shortContent = card.querySelector('.content-short');
+    const fullContent = card.querySelector('.content-full');
+
+    if (!shortContent || !fullContent) {
+      return;
+    }
+
+    const isExpanded = !fullContent.hidden;
+
+    if (isExpanded) {
+      fullContent.hidden = true;
+      shortContent.hidden = false;
+      button.textContent = '続きを読む';
+    } else {
+      fullContent.hidden = false;
+      shortContent.hidden = true;
+      button.textContent = '閉じる';
+    }
+  });
+}
+
 loadReactions();
 loadPosts();
 loadArchivePosts();
@@ -664,3 +695,4 @@ initLightbox();
 initImageProtection();
 initReactionPicker();
 initReactionButtons();
+initReadMore();
