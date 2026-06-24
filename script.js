@@ -506,9 +506,47 @@ function initImageProtection() {
   });
 }
 
+function initReactionPicker() {
+  const picker = document.getElementById('reaction-picker');
+
+  if (!picker) {
+    return;
+  }
+
+  document.addEventListener('click', event => {
+    const plusButton = event.target.closest('.reaction-plus-button');
+
+    if (!plusButton) {
+      picker.classList.remove('active');
+      return;
+    }
+
+    event.stopPropagation();
+
+    picker.innerHTML = REACTION_EMOJIS.map(emoji => `
+      <button
+        type="button"
+        class="reaction-picker-button"
+        data-post-id="${plusButton.dataset.postId}"
+        data-emoji="${emoji}"
+      >
+        ${emoji}
+      </button>
+    `).join('');
+
+    const rect = plusButton.getBoundingClientRect();
+
+    picker.style.left = `${rect.left}px`;
+    picker.style.top = `${rect.bottom + 8}px`;
+
+    picker.classList.add('active');
+  });
+}
+
 loadReactions();
 loadPosts();
 loadArchivePosts();
 
 initLightbox();
 initImageProtection();
+initReactionPicker();
