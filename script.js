@@ -594,6 +594,20 @@ function initReactionPicker() {
 
     await addReaction(postId, emoji);
   });
+
+function initReactionButtons() {
+  document.addEventListener('click', async event => {
+    const button = event.target.closest('.reaction-button');
+
+    if (!button) {
+      return;
+    }
+
+    const postId = button.dataset.postId;
+    const emoji = button.dataset.emoji;
+
+    await addReaction(postId, emoji);
+  });
 }
 
 loadReactions();
@@ -603,3 +617,4 @@ loadArchivePosts();
 initLightbox();
 initImageProtection();
 initReactionPicker();
+initReactionButtons();
