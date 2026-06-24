@@ -594,6 +594,7 @@ function initReactionPicker() {
 
     await addReaction(postId, emoji);
   });
+}  
 
 function initReactionButtons() {
   document.addEventListener('click', async event => {
