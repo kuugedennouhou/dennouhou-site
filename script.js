@@ -430,6 +430,44 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function getUserId() {
+  let userId = localStorage.getItem('userId');
+
+  if (!userId) {
+    userId = crypto.randomUUID();
+    localStorage.setItem('userId', userId);
+  }
+
+  return userId;
+}
+
+async function addReaction(postId, emoji) {
+  try {
+    const response = await fetch(POSTS_API_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'addReaction',
+        postId,
+        userId: getUserId(),
+        emoji
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    await loadReactions();
+    await loadPosts();
+    await loadArchivePosts();
+
+  } catch (error) {
+    console.error('Add reaction failed:', error);
+  }
+}
+
 async function loadArchivePosts() {
   try {
     const response = await fetch(ARCHIVE_API_URL);
@@ -541,6 +579,21 @@ function initReactionPicker() {
 
     picker.classList.add('active');
   });
+  
+    picker.addEventListener('click', async event => {
+      const button = event.target.closest('.reaction-picker-button');
+
+      if (!button) {
+        return;
+      }
+
+      const postId = button.dataset.postId;
+      const emoji = button.dataset.emoji;
+
+      picker.classList.remove('active');
+
+      await addReaction(postId, emoji);
+    });
 }
 
 loadReactions();
