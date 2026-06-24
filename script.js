@@ -580,20 +580,20 @@ function initReactionPicker() {
     picker.classList.add('active');
   });
   
-    picker.addEventListener('click', async event => {
-      const button = event.target.closest('.reaction-picker-button');
+  picker.addEventListener('click', async event => {
+    const button = event.target.closest('.reaction-picker-button');
 
-      if (!button) {
-        return;
-      }
+    if (!button) {
+      return;
+    }
 
-      const postId = button.dataset.postId;
-      const emoji = button.dataset.emoji;
+    const postId = button.dataset.postId;
+    const emoji = button.dataset.emoji;
 
-      picker.classList.remove('active');
+    picker.classList.remove('active');
 
-      await addReaction(postId, emoji);
-    });
+    await addReaction(postId, emoji);
+  });
 }
 
 loadReactions();
