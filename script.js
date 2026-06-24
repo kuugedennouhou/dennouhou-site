@@ -253,11 +253,10 @@ function getPostContentHtml(post) {
   const shortContent = content.slice(0, limit);
 
   return `
-    <div class="card-body">
-      <span class="content-short">${escapeHtml(shortContent)}...</span>
-      <span class="content-full" hidden>${escapeHtml(content)}</span>
-    </div>
-    <button class="read-more-button" type="button">続きを読む</button>
+  <div class="card-body">
+  <span class="content-short">${escapeHtml(shortContent)}...</span><span class="content-full" hidden>${escapeHtml(content)}</span>
+  </div>
+  <button class="read-more-button" type="button">続きを読む</button>
   `;
 }
 
