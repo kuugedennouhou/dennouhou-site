@@ -592,3 +592,10 @@ a:hover {
   border-color: rgba(93, 32, 185, 0.75);
   box-shadow: 0 0 10px var(--shadow-purple);
 }
+
+.reaction-button.reacted {
+  color: var(--text);
+  border-color: rgba(93, 32, 185, 0.85);
+  background: rgba(93, 32, 185, 0.18);
+  box-shadow: 0 0 12px var(--shadow-purple);
+}
