@@ -225,6 +225,7 @@ function createPostCard(post, isPinned = false) {
 
   const noticeLabel = getNoticeLabel(post);
   const streamLabel = getStreamLabel(post);
+  const contentHtml = getPostContentHtml(post);
   const imagesHtml = getPostImagesHtml(post);
   const reactionsHtml = getReactionsHtml(post);
 
@@ -233,12 +234,31 @@ function createPostCard(post, isPinned = false) {
     ${noticeLabel}
     ${streamLabel}
     <div class="card-meta">${getPostDateHtml(post)}</div>
-    <div class="card-body">${escapeHtml(post.content || '')}</div>
+    ${contentHtml}
     ${imagesHtml}
     ${reactionsHtml}
   `;
 
   return article;
+}
+
+function getPostContentHtml(post) {
+  const content = post.content || '';
+  const limit = 300;
+
+  if (content.length <= limit) {
+    return `<div class="card-body">${escapeHtml(content)}</div>`;
+  }
+
+  const shortContent = content.slice(0, limit);
+
+  return `
+    <div class="card-body">
+      <span class="content-short">${escapeHtml(shortContent)}...</span>
+      <span class="content-full" hidden>${escapeHtml(content)}</span>
+    </div>
+    <button class="read-more-button" type="button">続きを読む</button>
+  `;
 }
 
 function getReactionsHtml(post) {
