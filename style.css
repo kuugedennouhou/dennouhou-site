@@ -552,3 +552,43 @@ a:hover {
 .reaction-count {
   font-size: 0.78rem;
 }
+
+.reaction-picker {
+  display: none;
+  position: fixed;
+  z-index: 10001;
+
+  grid-template-columns: repeat(4, 36px);
+  gap: 8px;
+
+  padding: 10px;
+
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+
+  background: rgba(1, 9, 21, 0.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.45);
+}
+
+.reaction-picker.active {
+  display: grid;
+}
+
+.reaction-picker button {
+  width: 36px;
+  height: 36px;
+
+  border: 1px solid rgba(159, 177, 197, 0.18);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 1.1rem;
+
+  cursor: pointer;
+}
+
+.reaction-picker button:hover {
+  border-color: rgba(93, 32, 185, 0.75);
+  box-shadow: 0 0 10px var(--shadow-purple);
+}
