@@ -576,8 +576,27 @@ function initReactionPicker() {
 
     const rect = plusButton.getBoundingClientRect();
 
-    picker.style.left = `${rect.left}px`;
-    picker.style.top = `${rect.bottom + 8}px`;
+    const pickerWidth = 200;
+    const pickerHeight = 150;
+    const margin = 8;
+
+    let left = rect.left;
+    let top = rect.bottom + margin;
+
+    if (window.innerHeight - rect.bottom < pickerHeight + margin) {
+      top = rect.top - pickerHeight - margin;
+    }
+
+    if (left + pickerWidth > window.innerWidth) {
+      left = window.innerWidth - pickerWidth - margin;
+    }
+
+    if (left < margin) {
+      left = margin;
+    }
+
+    picker.style.left = `${left}px`;
+    picker.style.top = `${top}px`;
 
     picker.classList.add('active');
   });
