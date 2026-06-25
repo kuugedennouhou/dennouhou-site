@@ -290,7 +290,7 @@ function getTwitchLinkHtml(post) {
     return '';
   }
 
-  return ` <a class="stream-text-link" href="https://www.twitch.tv/kuugetsubaki" target="_blank" rel="noopener noreferrer">twitch.tv</a>`;
+  return ` <a class="stream-text-link" href="${siteConfig.twitchUrl}" target="_blank" rel="noopener noreferrer">twitch.tv</a>`;
 }
 
 function getReactionsHtml(post) {
