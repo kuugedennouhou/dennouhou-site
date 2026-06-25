@@ -118,7 +118,16 @@
     </section>
 
     <section id="schedule" class="panel">
-      <section class="schedule-section">
+      <div class="schedule-switch">
+        <button class="schedule-switch-button active" type="button" data-schedule-view="weekly">
+          Weekly
+        </button>
+        <button class="schedule-switch-button" type="button" data-schedule-view="monthly">
+          Monthly
+        </button>
+      </div>
+
+      <section id="weekly-schedule-panel" class="schedule-section active">
         <h2 class="schedule-title">Weekly Schedule</h2>
         <div class="cyber-divider"></div>
 
@@ -131,7 +140,7 @@
         <div id="weekly-schedule"></div>
       </section>
 
-      <section class="schedule-section">
+      <section id="monthly-schedule-panel" class="schedule-section">
         <h2 class="schedule-title">Monthly Schedule</h2>
         <div class="cyber-divider"></div>
 
