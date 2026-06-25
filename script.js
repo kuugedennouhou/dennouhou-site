@@ -243,18 +243,55 @@ function createPostCard(post, isPinned = false) {
 }
 
 function getPostContentHtml(post) {
-  const content = post.content || '';
+  const baseContent = post.content || '';
+  const streamDateText = getStreamDateText(post);
+  const twitchLinkHtml = getTwitchLinkHtml(post);
+
+  const content = streamDateText
+    ? `${streamDateText}\n${baseContent}`
+    : baseContent;
+
   const limit = 200;
 
+  const fullHtml = `${linkify(escapeHtml(content))}${twitchLinkHtml}`;
+
   if (content.length <= limit) {
-    return `<div class="card-body">${linkify(escapeHtml(content))}</div>`;
+    return `<div class="card-body">${fullHtml}</div>`;
   }
 
   const shortContent = content.slice(0, limit);
+  const shortHtml = `${linkify(escapeHtml(shortContent))}...${twitchLinkHtml}`;
 
-  return `<div class="card-body"><span class="content-short">${linkify(escapeHtml(shortContent))}...</span><span class="content-full" hidden>${linkify(escapeHtml(content))}</span></div>
+  return `<div class="card-body"><span class="content-short">${shortHtml}</span><span class="content-full" hidden>${fullHtml}</span></div>
   <button class="read-more-button" type="button">続きを読む</button>`;
+}
+
+function getStreamDateText(post) {
+  if (!post.streamStartAt) {
+    return '';
   }
+
+  const date = new Date(post.streamStartAt);
+
+  if (isNaN(date.getTime())) {
+    return '';
+  }
+
+  return date.toLocaleString('ja-JP', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  }) + '～';
+}
+
+function getTwitchLinkHtml(post) {
+  if (post.streamType !== 'Twitch') {
+    return '';
+  }
+
+  return ` <a class="stream-text-link" href="https://www.twitch.tv/kuugetsubaki" target="_blank" rel="noopener noreferrer">twitch.tv</a>`;
+}
 
 function getReactionsHtml(post) {
   const postId = post.postId;
