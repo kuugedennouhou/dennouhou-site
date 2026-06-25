@@ -666,3 +666,42 @@ a:hover {
   font-size: 0.9rem;
   line-height: 1.6;
 }
+
+.schedule-switch {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  margin: 0 0 28px;
+}
+
+.schedule-switch-button {
+  padding: 8px 18px;
+
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--subtext);
+
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.schedule-switch-button.active,
+.schedule-switch-button:hover {
+  color: var(--text);
+  border-color: rgba(93, 32, 185, 0.75);
+  box-shadow: 0 0 12px var(--shadow-purple);
+}
+
+.schedule-section {
+  display: none;
+}
+
+.schedule-section.active {
+  display: block;
+}
