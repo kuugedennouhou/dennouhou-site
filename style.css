@@ -670,32 +670,61 @@ a:hover {
 .schedule-switch {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 34px;
 
-  margin: 0 0 28px;
+  margin: 0 0 32px;
 }
 
 .schedule-switch-button {
-  padding: 8px 18px;
+  position: relative;
 
-  border: 1px solid var(--card-border);
-  border-radius: 999px;
+  padding: 6px 2px 10px;
 
-  background: rgba(255, 255, 255, 0.025);
+  border: 0;
+  background: transparent;
+
   color: var(--subtext);
 
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 800;
 
   cursor: pointer;
 }
 
-.schedule-switch-button.active,
+.schedule-switch-button::after {
+  content: "";
+
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  width: 0;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(93, 32, 185, 0.95),
+    rgba(144, 215, 236, 0.95)
+  );
+
+  box-shadow: 0 0 10px rgba(93, 32, 185, 0.45);
+
+  transform: translateX(-50%);
+  transition: width 0.18s ease;
+}
+
+.schedule-switch-button.active {
+  color: var(--text);
+}
+
+.schedule-switch-button.active::after,
+.schedule-switch-button:hover::after {
+  width: 100%;
+}
+
 .schedule-switch-button:hover {
   color: var(--text);
-  border-color: rgba(93, 32, 185, 0.75);
-  box-shadow: 0 0 12px var(--shadow-purple);
 }
 
 .schedule-section {
