@@ -1,5 +1,7 @@
 const SITE_CONFIG_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=siteConfig';
 
+let siteConfig = {};
+
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
 
@@ -39,6 +41,8 @@ async function loadSiteConfig() {
     }
 
     const config = result.siteConfig;
+
+    siteConfig = config;
 
     const siteTitle = document.querySelector('.site-title');
     const siteSubtitle = document.querySelector('.site-subtitle');
@@ -290,7 +294,16 @@ function getTwitchLinkHtml(post) {
     return '';
   }
 
-  return ` <a class="stream-text-link" href="https://www.twitch.tv/kuugetsubaki" target="_blank" rel="noopener noreferrer">twitch.tv</a>`;
+  if (!siteConfig.twitchUrl) {
+    return '';
+  }
+
+  return ` <a
+      class="stream-text-link"
+      href="${siteConfig.twitchUrl}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >twitch.tv</a>`;
 }
 
 function getReactionsHtml(post) {
