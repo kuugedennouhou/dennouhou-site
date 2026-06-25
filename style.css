@@ -657,8 +657,8 @@ a:hover {
 
 .schedule-meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 24px;
+  flex-direction: column;
+  gap: 6px;
 
   margin-bottom: 20px;
 
