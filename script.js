@@ -151,6 +151,12 @@ const ARCHIVE_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0
 const REACTIONS_API_URL =
   'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=reactions';
 
+const WEEKLY_SCHEDULE_API_URL =
+  'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=weeklySchedule';
+
+const MONTHLY_SCHEDULE_API_URL =
+  'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=monthlySchedule';
+
 async function loadPosts() {
   try {
     const response = await fetch(POSTS_API_URL);
