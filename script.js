@@ -3,7 +3,7 @@ const SITE_CONFIG_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWy
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
 
-const validTabs = ['about', 'all', 'post', 'notice', 'stream', 'archive'];
+const validTabs = ['about', 'schedule', 'all', 'post', 'notice', 'stream', 'archive'];
 
 function getCurrentTab() {
   const hash = location.hash.replace('#', '');
