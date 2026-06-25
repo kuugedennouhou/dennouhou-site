@@ -672,7 +672,7 @@ a:hover {
   justify-content: center;
   gap: 34px;
 
-  margin: 0 0 32px;
+  margin: 0 0 20px;
 }
 
 .schedule-switch-button {
@@ -716,6 +716,8 @@ a:hover {
 
 .schedule-switch-button.active {
   color: var(--text);
+
+  transform: translateY(-1px);
 }
 
 .schedule-switch-button.active::after,
@@ -725,6 +727,8 @@ a:hover {
 
 .schedule-switch-button:hover {
   color: var(--text);
+
+  transform: translateY(-1px);
 }
 
 .schedule-section {
