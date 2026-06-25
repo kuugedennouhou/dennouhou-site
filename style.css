@@ -617,3 +617,52 @@ a:hover {
 .read-more-button:hover {
   color: var(--text);
 }
+
+/* ==========================
+   Schedule
+========================== */
+
+.schedule-section + .schedule-section {
+  margin-top: 56px;
+}
+
+.schedule-title {
+  margin: 0;
+
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+
+  color: var(--text);
+
+  letter-spacing: 0.04em;
+}
+
+.cyber-divider {
+  height: 1px;
+
+  margin: 14px 0 18px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(93, 32, 185, 0.45),
+    rgba(144, 215, 236, 0.70),
+    rgba(93, 32, 185, 0.45),
+    transparent
+  );
+
+  box-shadow: 0 0 10px rgba(93, 32, 185, 0.22);
+}
+
+.schedule-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+
+  margin-bottom: 20px;
+
+  color: var(--subtext);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
