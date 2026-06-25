@@ -738,3 +738,10 @@ a:hover {
 .schedule-section.active {
   display: block;
 }
+
+.stream-text-link {
+  margin-left: 8px;
+
+  font-size: 0.95em;
+  font-weight: 600;
+}
