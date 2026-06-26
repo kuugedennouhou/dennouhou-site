@@ -770,6 +770,8 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 10px;
+  
+  margin-left: 18px;
 
   color: var(--text);
   line-height: 1.7;
@@ -796,6 +798,7 @@ a:hover {
   white-space: nowrap;
 }
 
+/*
 @media (max-width: 640px) {
   .weekly-schedule-main {
     align-items: flex-start;
@@ -803,3 +806,4 @@ a:hover {
     gap: 4px;
   }
 }
+*/
