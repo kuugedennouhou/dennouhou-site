@@ -745,3 +745,61 @@ a:hover {
   font-size: 0.95em;
   font-weight: 600;
 }
+
+.weekly-schedule-list {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.weekly-schedule-item {
+  padding: 14px 0;
+
+  border-bottom: 1px solid rgba(159, 177, 197, 0.14);
+}
+
+.weekly-schedule-date {
+  margin-bottom: 6px;
+
+  color: var(--subtext);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.weekly-schedule-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.weekly-schedule-time {
+  flex: 0 0 auto;
+
+  font-weight: 800;
+}
+
+.weekly-schedule-platform {
+  flex: 0 0 auto;
+
+  color: var(--subtext);
+  font-size: 0.85rem;
+}
+
+.weekly-schedule-content {
+  min-width: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .weekly-schedule-main {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
