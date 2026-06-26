@@ -906,19 +906,10 @@ function showSchedulePopup(target, event) {
     return;
   }
 
-  popup.innerHTML = `
-    <div class="schedule-popup-platform">
-      ${target.dataset.detailPlatform}
-    </div>
-
-    <div class="schedule-popup-date">
-      ${target.dataset.detailDate}
-    </div>
-
-    <div class="schedule-popup-content">
-      ${target.dataset.detailContent}
-    </div>
-  `;
+  popup.innerHTML =
+    `<div class="schedule-popup-platform">${target.dataset.detailPlatform}</div>` +
+    `<div class="schedule-popup-date">${target.dataset.detailDate}</div>` +
+    `<div class="schedule-popup-content">${target.dataset.detailContent}</div>`;
 
   popup.classList.add('active');
 
