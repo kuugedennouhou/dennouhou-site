@@ -252,6 +252,48 @@ function renderWeeklySchedule(posts) {
   `;
 }
 
+function renderMonthlySchedule(posts) {
+  const container = document.getElementById('monthly-schedule');
+
+  if (!container) {
+    return;
+  }
+
+  if (!posts.length) {
+    container.innerHTML = '<div class="empty">表示できる予定・履歴はまだありません。</div>';
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="weekly-schedule-list">
+      ${posts.map(post => `
+        <div
+          class="weekly-schedule-item schedule-detail-trigger"
+          data-detail-platform="${escapeHtml(getMonthlyPlatformLabel(post))}"
+          data-detail-date="${escapeHtml(formatScheduleDetailDate(post.streamStartAt))}"
+          data-detail-content="${escapeHtml(post.content || '')}"
+        >
+          <div class="weekly-schedule-date">
+            ${escapeHtml(formatWeeklyDate(post.streamStartAt))}
+          </div>
+
+          <div class="weekly-schedule-main">
+            <span class="weekly-schedule-time">
+              ${escapeHtml(formatWeeklyTime(post.streamStartAt))}
+            </span>
+            <span class="weekly-schedule-platform">
+              ${escapeHtml(getMonthlyPlatformLabel(post))}
+            </span>
+            <span class="weekly-schedule-content">
+              ${escapeHtml(post.content || '')}
+            </span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 function formatScheduleDetailDate(value) {
   const date = new Date(value);
 
@@ -266,6 +308,30 @@ function formatScheduleDetailDate(value) {
     hour: '2-digit',
     minute: '2-digit'
   });
+}
+
+function getMonthlyPlatformLabel(post) {
+  if (post.streamType === 'Twitch') {
+    return '🟣 Twitch';
+  }
+
+  if (post.streamType === 'YouTube') {
+    switch (post.streamContentType) {
+      case 'Live':
+        return '🔴 Live';
+
+      case '動画':
+        return '🎬 Video';
+
+      case 'Shorts':
+        return '📱 Shorts';
+
+      default:
+        return '🔴 YouTube';
+    }
+  }
+
+  return '';
 }
 
 function formatWeeklyDate(value) {
