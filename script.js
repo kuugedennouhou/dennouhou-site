@@ -504,17 +504,12 @@ function getStreamLabel(post) {
   let streamLabel = '';
   let statusLabel = '';
 
-  if (
-  post.streamType === 'Twitch' ||
-  (post.streamType === 'YouTube' && ['Live', 'ライブ', 'YouTube Live'].includes(post.streamContentType))
-) {
-    if (post.streamStatus) {
-      statusLabel = `
-        <div class="stream-status stream-status-${post.streamStatus}">
-          ${escapeHtml(post.streamStatus)}
-        </div>
-      `;
-    }
+  if (post.streamStatus) {
+    statusLabel = `
+      <div class="stream-status stream-status-${post.streamStatus}">
+        ${escapeHtml(post.streamStatus)}
+      </div>
+    `;
   }
 
   if (post.streamType === 'Twitch') {
