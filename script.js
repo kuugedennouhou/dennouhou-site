@@ -194,6 +194,22 @@ async function loadWeeklySchedule() {
   }
 }
 
+async function loadMonthlySchedule() {
+  try {
+    const response = await fetch(MONTHLY_SCHEDULE_API_URL);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    renderMonthlySchedule(result.posts || []);
+
+  } catch (error) {
+    console.error('Monthly schedule load failed:', error);
+  }
+}
+
 function renderWeeklySchedule(posts) {
   const container = document.getElementById('weekly-schedule');
 
@@ -971,6 +987,7 @@ loadReactions();
 loadPosts();
 loadArchivePosts();
 loadWeeklySchedule();
+loadMonthlySchedule();
 
 initLightbox();
 initImageProtection();
