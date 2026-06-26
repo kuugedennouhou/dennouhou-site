@@ -798,6 +798,57 @@ a:hover {
   white-space: nowrap;
 }
 
+.schedule-popup {
+  display: none;
+
+  position: fixed;
+  z-index: 10002;
+
+  width: min(320px, calc(100vw - 32px));
+  padding: 14px 16px;
+
+  border: 1px solid rgba(159, 177, 197, 0.24);
+  border-radius: 16px;
+
+  background: rgba(1, 9, 21, 0.88);
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 0 18px rgba(93, 32, 185, 0.28),
+    0 10px 30px rgba(0, 0, 0, 0.38);
+
+  color: var(--text);
+
+  pointer-events: none;
+}
+
+.schedule-popup.active {
+  display: block;
+}
+
+.schedule-popup-platform {
+  margin-bottom: 6px;
+
+  color: var(--subtext);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.schedule-popup-date {
+  margin-bottom: 10px;
+
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.schedule-popup-content {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
 /*
 @media (max-width: 640px) {
   .weekly-schedule-main {
