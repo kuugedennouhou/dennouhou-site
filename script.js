@@ -892,6 +892,36 @@ function initSchedulePopup() {
 
     popup.classList.remove('active');
   }, true);
+
+  let activeScheduleTarget = null;
+
+  document.addEventListener('click', event => {
+    const target = event.target.closest('.schedule-detail-trigger');
+    const popup = document.getElementById('schedule-popup');
+
+    if (!popup) {
+      return;
+    }
+
+    if (!target) {
+      popup.classList.remove('active');
+      activeScheduleTarget = null;
+      return;
+    }
+
+    if (window.matchMedia('(hover: none)').matches) {
+
+      if (activeScheduleTarget === target) {
+        popup.classList.remove('active');
+        activeScheduleTarget = null;
+        return;
+      }
+
+      showSchedulePopup(target, event);
+
+      activeScheduleTarget = target;
+    }
+  });
 }
 
 function showSchedulePopup(target, event) {
