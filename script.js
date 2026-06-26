@@ -1009,6 +1009,29 @@ function initSchedulePopup() {
   });
 }
 
+function initScheduleSwitch() {
+  const buttons = document.querySelectorAll('.schedule-switch-button');
+  const weeklyPanel = document.getElementById('weekly-schedule-panel');
+  const monthlyPanel = document.getElementById('monthly-schedule-panel');
+
+  if (!buttons.length || !weeklyPanel || !monthlyPanel) {
+    return;
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const view = button.dataset.scheduleView;
+
+      buttons.forEach(item => {
+        item.classList.toggle('active', item === button);
+      });
+
+      weeklyPanel.classList.toggle('active', view === 'weekly');
+      monthlyPanel.classList.toggle('active', view === 'monthly');
+    });
+  });
+}
+
 function showSchedulePopup(target, event) {
   const popup = document.getElementById('schedule-popup');
 
@@ -1061,3 +1084,4 @@ initReactionPicker();
 initReactionButtons();
 initReadMore();
 initSchedulePopup();
+initScheduleSwitch();
