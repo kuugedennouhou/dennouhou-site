@@ -873,7 +873,13 @@ function initSchedulePopup() {
     return;
   }
 
+  let activeScheduleTarget = null;
+
   document.addEventListener('pointerenter', event => {
+    if (window.matchMedia('(hover: none)').matches) {
+      return;
+    }
+
     const target = event.target.closest('.schedule-detail-trigger');
 
     if (!target) {
@@ -884,6 +890,10 @@ function initSchedulePopup() {
   }, true);
 
   document.addEventListener('pointerleave', event => {
+    if (window.matchMedia('(hover: none)').matches) {
+      return;
+    }
+
     const target = event.target.closest('.schedule-detail-trigger');
 
     if (!target) {
@@ -893,15 +903,8 @@ function initSchedulePopup() {
     popup.classList.remove('active');
   }, true);
 
-  let activeScheduleTarget = null;
-
   document.addEventListener('click', event => {
     const target = event.target.closest('.schedule-detail-trigger');
-    const popup = document.getElementById('schedule-popup');
-
-    if (!popup) {
-      return;
-    }
 
     if (!target) {
       popup.classList.remove('active');
@@ -909,18 +912,18 @@ function initSchedulePopup() {
       return;
     }
 
-    if (window.matchMedia('(hover: none)').matches) {
-
-      if (activeScheduleTarget === target) {
-        popup.classList.remove('active');
-        activeScheduleTarget = null;
-        return;
-      }
-
-      showSchedulePopup(target, event);
-
-      activeScheduleTarget = target;
+    if (!window.matchMedia('(hover: none)').matches) {
+      return;
     }
+
+    if (activeScheduleTarget === target) {
+      popup.classList.remove('active');
+      activeScheduleTarget = null;
+      return;
+    }
+
+    showSchedulePopup(target, event);
+    activeScheduleTarget = target;
   });
 }
 
