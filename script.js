@@ -871,6 +871,61 @@ function initReadMore() {
   });
 }
 
+function initSchedulePopup() {
+  const popup = document.getElementById('schedule-popup');
+
+  if (!popup) {
+    return;
+  }
+
+  document.addEventListener('pointerenter', event => {
+    const target = event.target.closest('.schedule-detail-trigger');
+
+    if (!target) {
+      return;
+    }
+
+    showSchedulePopup(target, event);
+  }, true);
+
+  document.addEventListener('pointerleave', event => {
+    const target = event.target.closest('.schedule-detail-trigger');
+
+    if (!target) {
+      return;
+    }
+
+    popup.classList.remove('active');
+  }, true);
+}
+
+function showSchedulePopup(target, event) {
+  const popup = document.getElementById('schedule-popup');
+
+  if (!popup) {
+    return;
+  }
+
+  popup.innerHTML = `
+    <div class="schedule-popup-platform">
+      ${target.dataset.detailPlatform}
+    </div>
+
+    <div class="schedule-popup-date">
+      ${target.dataset.detailDate}
+    </div>
+
+    <div class="schedule-popup-content">
+      ${target.dataset.detailContent}
+    </div>
+  `;
+
+  popup.style.left = `${event.clientX + 16}px`;
+  popup.style.top = `${event.clientY + 16}px`;
+
+  popup.classList.add('active');
+}
+
 loadReactions();
 loadPosts();
 loadArchivePosts();
@@ -881,3 +936,4 @@ initImageProtection();
 initReactionPicker();
 initReactionButtons();
 initReadMore();
+initSchedulePopup();
