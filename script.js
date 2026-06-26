@@ -194,6 +194,83 @@ async function loadWeeklySchedule() {
   }
 }
 
+function renderWeeklySchedule(posts) {
+  const container = document.getElementById('weekly-schedule');
+
+  if (!container) {
+    return;
+  }
+
+  if (!posts.length) {
+    container.innerHTML = '<div class="empty">配信予定はまだありません。</div>';
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="weekly-schedule-list">
+      ${posts.map(post => `
+        <div class="weekly-schedule-item">
+          <div class="weekly-schedule-date">
+            ${escapeHtml(formatWeeklyDate(post.streamStartAt))}
+          </div>
+
+          <div class="weekly-schedule-main">
+            <span class="weekly-schedule-time">
+              ${escapeHtml(formatWeeklyTime(post.streamStartAt))}
+            </span>
+            <span class="weekly-schedule-platform">
+              ${escapeHtml(getSchedulePlatformLabel(post))}
+            </span>
+            <span class="weekly-schedule-content">
+              ${escapeHtml(post.content || '')}
+            </span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function formatWeeklyDate(value) {
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return '';
+  }
+
+  const weekdays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+  return date.toLocaleDateString('ja-JP', {
+    month: '2-digit',
+    day: '2-digit'
+  }) + ` ${weekdays[date.getDay()]}`;
+}
+
+function formatWeeklyTime(value) {
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return '';
+  }
+
+  return date.toLocaleTimeString('ja-JP', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+function getSchedulePlatformLabel(post) {
+  if (post.streamType === 'Twitch') {
+    return '🟣 Twitch';
+  }
+
+  if (post.streamType === 'YouTube') {
+    return '🔴 YouTube Live';
+  }
+
+  return '';
+}
+
 let reactionsData = [];
 
 const REACTION_EMOJIS = ['🩷', '👀', '✨', '💦', '👍', '🙏', '🤣', '😭', '🥺', '😱', '🔥', '💤'];
