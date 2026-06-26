@@ -418,7 +418,9 @@ a:hover {
 
 /* 予定・アーカイブ */
 .stream-status-予定,
-.stream-status-アーカイブ {
+.stream-status-アーカイブ,
+.stream-status-公開中,
+.stream-status-非公開 {
   color: #F6F5EA;
   background: rgba(246, 245, 234, 0.25);
   border: 1px solid rgba(246, 245, 234, 0.45);
