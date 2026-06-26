@@ -805,7 +805,7 @@ a:hover {
   z-index: 10002;
 
   width: min(320px, calc(100vw - 32px));
-  padding: 14px 16px;
+  padding: 10px 16px;
 
   border: 1px solid rgba(159, 177, 197, 0.24);
   border-radius: 16px;
@@ -835,7 +835,7 @@ a:hover {
 }
 
 .schedule-popup-date {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 
   color: var(--text);
   font-size: 0.9rem;
