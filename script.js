@@ -265,7 +265,19 @@ function getSchedulePlatformLabel(post) {
   }
 
   if (post.streamType === 'YouTube') {
-    return '🔴 YouTube Live';
+    switch (post.streamContentType) {
+      case 'Live':
+        return '🔴 Live';
+
+      case '動画':
+        return '🎬 Video';
+
+      case 'Shorts':
+        return '📱 Shorts';
+
+      default:
+        return '🔴 YouTube';
+    }
   }
 
   return '';
@@ -495,7 +507,7 @@ function getStreamLabel(post) {
         break;
 
       case '動画':
-        streamLabel = '🎬 YouTube 動画';
+        streamLabel = '🎬 YouTube Video';
         break;
 
       case 'Shorts':
