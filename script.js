@@ -178,6 +178,22 @@ async function loadPosts() {
   }
 }
 
+async function loadWeeklySchedule() {
+  try {
+    const response = await fetch(WEEKLY_SCHEDULE_API_URL);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    renderWeeklySchedule(result.posts || []);
+
+  } catch (error) {
+    console.error('Weekly schedule load failed:', error);
+  }
+}
+
 let reactionsData = [];
 
 const REACTION_EMOJIS = ['🩷', '👀', '✨', '💦', '👍', '🙏', '🤣', '😭', '🥺', '😱', '🔥', '💤'];
@@ -748,6 +764,7 @@ function initReadMore() {
 loadReactions();
 loadPosts();
 loadArchivePosts();
+loadWeeklySchedule();
 
 initLightbox();
 initImageProtection();
