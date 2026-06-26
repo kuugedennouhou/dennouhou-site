@@ -920,10 +920,32 @@ function showSchedulePopup(target, event) {
     </div>
   `;
 
-  popup.style.left = `${event.clientX + 16}px`;
-  popup.style.top = `${event.clientY + 16}px`;
-
   popup.classList.add('active');
+
+  const rect = popup.getBoundingClientRect();
+  const margin = 12;
+
+  let left = event.clientX + 16;
+  let top = event.clientY + 16;
+
+  if (left + rect.width > window.innerWidth - margin) {
+    left = window.innerWidth - rect.width - margin;
+  }
+
+  if (top + rect.height > window.innerHeight - margin) {
+    top = event.clientY - rect.height - 16;
+  }
+
+  if (left < margin) {
+    left = margin;
+  }
+
+  if (top < margin) {
+    top = margin;
+  }
+
+  popup.style.left = `${left}px`;
+  popup.style.top = `${top}px`;
 }
 
 loadReactions();
