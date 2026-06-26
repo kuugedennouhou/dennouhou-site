@@ -209,7 +209,12 @@ function renderWeeklySchedule(posts) {
   container.innerHTML = `
     <div class="weekly-schedule-list">
       ${posts.map(post => `
-        <div class="weekly-schedule-item">
+        <div
+          class="weekly-schedule-item schedule-detail-trigger"
+          data-detail-platform="${escapeHtml(getSchedulePlatformLabel(post))}"
+          data-detail-date="${escapeHtml(formatScheduleDetailDate(post.streamStartAt))}"
+          data-detail-content="${escapeHtml(post.content || '')}"
+        >
           <div class="weekly-schedule-date">
             ${escapeHtml(formatWeeklyDate(post.streamStartAt))}
           </div>
@@ -229,6 +234,22 @@ function renderWeeklySchedule(posts) {
       `).join('')}
     </div>
   `;
+}
+
+function formatScheduleDetailDate(value) {
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return '';
+  }
+
+  return date.toLocaleString('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
 }
 
 function formatWeeklyDate(value) {
