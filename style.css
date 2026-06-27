@@ -871,6 +871,9 @@ a:hover {
 .monthly-calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+
+  border-top: 1px solid rgba(159, 177, 197, 0.12);
+  border-left: 1px solid rgba(159, 177, 197, 0.08);
 }
 
 .monthly-calendar-weekdays {
