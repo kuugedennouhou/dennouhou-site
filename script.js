@@ -2,6 +2,8 @@ const SITE_CONFIG_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWy
 
 let siteConfig = {};
 
+let currentMonthlyDate = new Date();
+
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
 
@@ -264,9 +266,8 @@ function renderMonthlySchedule(posts) {
     return;
   }
 
-  const targetDate = new Date(posts[0].streamStartAt);
-  const year = targetDate.getFullYear();
-  const month = targetDate.getMonth();
+  const year = currentMonthlyDate.getFullYear();
+  const month = currentMonthlyDate.getMonth();
 
   const days = buildMonthlyCalendarDays(year, month, posts);
 
