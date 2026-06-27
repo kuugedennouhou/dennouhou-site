@@ -327,18 +327,18 @@ function renderMonthlyCalendarCell(dayData) {
 
   const visiblePosts = dayData.posts.slice(0, 2);
   const hasMore = dayData.posts.length > 2;
+  const detailListHtml = createMonthlyDetailListHtml(dayData);
 
   return `
-    <div class="monthly-calendar-cell">
+    <div
+      class="monthly-calendar-cell ${dayData.posts.length ? 'schedule-detail-trigger' : ''}"
+      data-detail-list="${escapeHtml(detailListHtml)}"
+    >
       <div class="monthly-calendar-day">${dayData.day}</div>
 
       <div class="monthly-calendar-events">
         ${visiblePosts.map(post => `
-          <div class="monthly-calendar-event schedule-detail-trigger"
-            data-detail-platform="${escapeHtml(getMonthlyPlatformLabel(post))}"
-            data-detail-date="${escapeHtml(formatScheduleDetailDate(post.streamStartAt))}"
-            data-detail-content="${escapeHtml(post.content || '')}"
-          >
+          <div class="monthly-calendar-event">
             ${escapeHtml(getMonthlyIcon(post))} ${escapeHtml(formatWeeklyTime(post.streamStartAt))}～
           </div>
         `).join('')}
@@ -346,6 +346,34 @@ function renderMonthlyCalendarCell(dayData) {
         ${hasMore ? '<div class="monthly-calendar-more">More</div>' : ''}
       </div>
     </div>
+  `;
+}
+
+function createMonthlyDetailListHtml(dayData) {
+  if (!dayData.posts.length) {
+    return '';
+  }
+
+  const firstPost = dayData.posts[0];
+
+  return `
+    <div class="schedule-popup-date">
+      ${escapeHtml(formatWeeklyDate(firstPost.streamStartAt))}
+    </div>
+
+    ${dayData.posts.map(post => `
+      <div class="schedule-popup-entry">
+        <div class="schedule-popup-platform">
+          ${escapeHtml(getMonthlyPlatformLabel(post))}
+        </div>
+        <div class="schedule-popup-time">
+          ${escapeHtml(formatWeeklyTime(post.streamStartAt))}～
+        </div>
+        <div class="schedule-popup-content">
+          ${escapeHtml(post.content || '')}
+        </div>
+      </div>
+    `).join('<div class="schedule-popup-separator"></div>')}
   `;
 }
 
@@ -1109,10 +1137,14 @@ function showSchedulePopup(target, event) {
     return;
   }
 
-  popup.innerHTML =
-    `<div class="schedule-popup-platform">${target.dataset.detailPlatform}</div>` +
-    `<div class="schedule-popup-date">${target.dataset.detailDate}</div>` +
-    `<div class="schedule-popup-content">${target.dataset.detailContent}</div>`;
+  if (target.dataset.detailList) {
+    popup.innerHTML = target.dataset.detailList;
+  } else {
+    popup.innerHTML =
+      `<div class="schedule-popup-platform">${target.dataset.detailPlatform}</div>` +
+      `<div class="schedule-popup-date">${target.dataset.detailDate}</div>` +
+      `<div class="schedule-popup-content">${target.dataset.detailContent}</div>`;
+  }
 
   popup.classList.add('active');
 
