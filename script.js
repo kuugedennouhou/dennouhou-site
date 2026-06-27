@@ -272,8 +272,18 @@ function renderMonthlySchedule(posts) {
 
   container.innerHTML = `
     <div class="monthly-calendar">
-      <div class="monthly-calendar-header">
-        ${year}/${String(month + 1).padStart(2, '0')}
+      <div class="monthly-calendar-nav">
+        <button class="monthly-calendar-nav-button" type="button" data-month-move="-1">
+          <i class="fa-solid fa-caret-left"></i>
+        </button>
+
+        <span class="monthly-calendar-title">
+          ${year}/${String(month + 1).padStart(2, '0')}
+        </span>
+
+        <button class="monthly-calendar-nav-button" type="button" data-month-move="1">
+          <i class="fa-solid fa-caret-right"></i>
+        </button>
       </div>
 
       <div class="monthly-calendar-weekdays">
