@@ -264,34 +264,104 @@ function renderMonthlySchedule(posts) {
     return;
   }
 
-  container.innerHTML = `
-    <div class="weekly-schedule-list">
-      ${posts.map(post => `
-        <div
-          class="weekly-schedule-item schedule-detail-trigger"
-          data-detail-platform="${escapeHtml(getMonthlyPlatformLabel(post))}"
-          data-detail-date="${escapeHtml(formatScheduleDetailDate(post.streamStartAt))}"
-          data-detail-content="${escapeHtml(post.content || '')}"
-        >
-          <div class="weekly-schedule-date">
-            ${escapeHtml(formatWeeklyDate(post.streamStartAt))}
-          </div>
+  const targetDate = new Date(posts[0].streamStartAt);
+  const year = targetDate.getFullYear();
+  const month = targetDate.getMonth();
 
-          <div class="weekly-schedule-main">
-            <span class="weekly-schedule-time">
-              ${escapeHtml(formatWeeklyTime(post.streamStartAt))}
-            </span>
-            <span class="weekly-schedule-platform">
-              ${escapeHtml(getMonthlyPlatformLabel(post))}
-            </span>
-            <span class="weekly-schedule-content">
-              ${escapeHtml(post.content || '')}
-            </span>
-          </div>
-        </div>
-      `).join('')}
+  const days = buildMonthlyCalendarDays(year, month, posts);
+
+  container.innerHTML = `
+    <div class="monthly-calendar">
+      <div class="monthly-calendar-header">
+        ${year}/${String(month + 1).padStart(2, '0')}
+      </div>
+
+      <div class="monthly-calendar-weekdays">
+        <div>SUN</div>
+        <div>MON</div>
+        <div>TUE</div>
+        <div>WED</div>
+        <div>THU</div>
+        <div>FRI</div>
+        <div>SAT</div>
+      </div>
+
+      <div class="monthly-calendar-grid">
+        ${days.map(day => renderMonthlyCalendarCell(day)).join('')}
+      </div>
     </div>
   `;
+}
+
+function buildMonthlyCalendarDays(year, month, posts) {
+  const firstDate = new Date(year, month, 1);
+  const lastDate = new Date(year, month + 1, 0);
+  const startDay = firstDate.getDay();
+
+  const days = [];
+
+  for (let i = 0; i < startDay; i++) {
+    days.push(null);
+  }
+
+  for (let day = 1; day <= lastDate.getDate(); day++) {
+    const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+    const dayPosts = posts
+      .filter(post => getDateKey(post.streamStartAt) === dateKey)
+      .sort((a, b) => new Date(a.streamStartAt) - new Date(b.streamStartAt));
+
+    days.push({
+      day,
+      posts: dayPosts
+    });
+  }
+
+  return days;
+}
+
+function renderMonthlyCalendarCell(dayData) {
+  if (!dayData) {
+    return `<div class="monthly-calendar-cell empty-cell"></div>`;
+  }
+
+  const visiblePosts = dayData.posts.slice(0, 2);
+  const hasMore = dayData.posts.length > 2;
+
+  return `
+    <div class="monthly-calendar-cell">
+      <div class="monthly-calendar-day">${dayData.day}</div>
+
+      <div class="monthly-calendar-events">
+        ${visiblePosts.map(post => `
+          <div class="monthly-calendar-event schedule-detail-trigger"
+            data-detail-platform="${escapeHtml(getMonthlyPlatformLabel(post))}"
+            data-detail-date="${escapeHtml(formatScheduleDetailDate(post.streamStartAt))}"
+            data-detail-content="${escapeHtml(post.content || '')}"
+          >
+            ${escapeHtml(getMonthlyIcon(post))} ${escapeHtml(formatWeeklyTime(post.streamStartAt))}～
+          </div>
+        `).join('')}
+
+        ${hasMore ? '<div class="monthly-calendar-more">More</div>' : ''}
+      </div>
+    </div>
+  `;
+}
+
+function getDateKey(value) {
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return '';
+  }
+
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+
+function getMonthlyIcon(post) {
+  const label = getMonthlyPlatformLabel(post);
+  return label.split(' ')[0] || '';
 }
 
 function formatScheduleDetailDate(value) {
