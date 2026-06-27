@@ -360,7 +360,7 @@ function createMonthlyDetailListHtml(dayData) {
     return (
       `<div class="schedule-popup-entry">` +
         `<div class="schedule-popup-entry-head">` +
-          `<span class="schedule-popup-platform">${escapeHtml(getMonthlyPlatformLabel(post))}</span>` +
+          `<span class="schedule-popup-platform schedule-popup-platform-monthly">${escapeHtml(getMonthlyPlatformLabel(post))}</span>` +
           `<span class="schedule-popup-time">${escapeHtml(formatWeeklyTime(post.streamStartAt))}～</span>` +
         `</div>` +
         `<div class="schedule-popup-content">${escapeHtml(post.content || '')}</div>` +
