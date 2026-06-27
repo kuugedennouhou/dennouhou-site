@@ -1138,6 +1138,26 @@ function initScheduleSwitch() {
   });
 }
 
+function initMonthlyCalendarNav() {
+  document.addEventListener('click', event => {
+    const button = event.target.closest('.monthly-calendar-nav-button');
+
+    if (!button) {
+      return;
+    }
+
+    const move = Number(button.dataset.monthMove);
+
+    if (!move) {
+      return;
+    }
+
+    currentMonthlyDate.setMonth(currentMonthlyDate.getMonth() + move);
+
+    loadMonthlySchedule();
+  });
+}
+
 function showSchedulePopup(target, event) {
   const popup = document.getElementById('schedule-popup');
 
@@ -1195,3 +1215,4 @@ initReactionButtons();
 initReadMore();
 initSchedulePopup();
 initScheduleSwitch();
+initMonthlyCalendarNav();
