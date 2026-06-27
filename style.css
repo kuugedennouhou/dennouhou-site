@@ -836,6 +836,13 @@ a:hover {
   font-weight: 700;
 }
 
+.schedule-popup-platform-monthly {
+  display: inline-block;
+  width: 86px;
+
+  margin-bottom: 0;
+}
+
 .schedule-popup-date {
   margin-bottom: 10px;
 
