@@ -915,7 +915,7 @@ a:hover {
 }
 
 .monthly-calendar-event,
-.monthly-calendar-more {
+
   font-size: 0.78rem;
   line-height: 1.5;
   white-space: nowrap;
@@ -928,6 +928,12 @@ a:hover {
 .monthly-calendar-more {
   color: var(--subtext);
   font-weight: 700;
+
+  text-align: right;
+  padding-right: 4px;
+
+  font-size: 0.72rem;
+  opacity: 0.8;
 }
 
 .schedule-popup-entry + .schedule-popup-entry {
