@@ -955,6 +955,22 @@ a:hover {
   background: rgba(159, 177, 197, 0.14);
 }
 
+@media (max-width: 640px) {
+  .monthly-calendar {
+    max-width: none;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .monthly-calendar-weekdays,
+  .monthly-calendar-grid {
+    min-width: 700px;
+  }
+
+  .monthly-calendar-cell {
+    min-height: 100px;
+  }
+}
 /*
 @media (max-width: 640px) {
   .weekly-schedule-main {
