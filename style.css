@@ -854,6 +854,68 @@ a:hover {
   text-align: left;
 }
 
+.monthly-calendar {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.monthly-calendar-header {
+  margin-bottom: 14px;
+
+  color: var(--text);
+  font-weight: 800;
+  text-align: center;
+}
+
+.monthly-calendar-weekdays,
+.monthly-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.monthly-calendar-weekdays {
+  border-bottom: 1px solid rgba(159, 177, 197, 0.18);
+}
+
+.monthly-calendar-weekdays div {
+  padding: 8px 4px;
+
+  color: var(--subtext);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.monthly-calendar-cell {
+  min-height: 92px;
+  padding: 8px;
+
+  border-bottom: 1px solid rgba(159, 177, 197, 0.12);
+  border-right: 1px solid rgba(159, 177, 197, 0.08);
+}
+
+.monthly-calendar-day {
+  margin-bottom: 6px;
+
+  font-weight: 800;
+}
+
+.monthly-calendar-event,
+.monthly-calendar-more {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.monthly-calendar-event {
+  cursor: pointer;
+}
+
+.monthly-calendar-more {
+  color: var(--subtext);
+  font-weight: 700;
+}
+
 /*
 @media (max-width: 640px) {
   .weekly-schedule-main {
