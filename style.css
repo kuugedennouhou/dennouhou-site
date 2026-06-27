@@ -855,7 +855,7 @@ a:hover {
 }
 
 .monthly-calendar {
-  max-width: 860px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -890,7 +890,7 @@ a:hover {
 }
 
 .monthly-calendar-cell {
-  min-height: 92px;
+  min-height: 110px;
   padding: 8px;
 
   border-bottom: 1px solid rgba(159, 177, 197, 0.12);
@@ -901,6 +901,10 @@ a:hover {
   margin-bottom: 6px;
 
   font-weight: 800;
+}
+
+.monthly-calendar-events {
+  padding-left: 2px;
 }
 
 .monthly-calendar-event,
