@@ -356,25 +356,22 @@ function createMonthlyDetailListHtml(dayData) {
 
   const firstPost = dayData.posts[0];
 
-  return `
-    <div class="schedule-popup-date">
-      ${escapeHtml(formatWeeklyDate(firstPost.streamStartAt))}
-    </div>
+  const entriesHtml = dayData.posts.map(post => {
+    return (
+      `<div class="schedule-popup-entry">` +
+        `<div class="schedule-popup-entry-head">` +
+          `<span class="schedule-popup-platform">${escapeHtml(getMonthlyPlatformLabel(post))}</span>` +
+          `<span class="schedule-popup-time">${escapeHtml(formatWeeklyTime(post.streamStartAt))}～</span>` +
+        `</div>` +
+        `<div class="schedule-popup-content">${escapeHtml(post.content || '')}</div>` +
+      `</div>`
+    );
+  }).join('<div class="schedule-popup-separator"></div>');
 
-    ${dayData.posts.map(post => `
-      <div class="schedule-popup-entry">
-        <div class="schedule-popup-platform">
-          ${escapeHtml(getMonthlyPlatformLabel(post))}
-        </div>
-        <div class="schedule-popup-time">
-          ${escapeHtml(formatWeeklyTime(post.streamStartAt))}～
-        </div>
-        <div class="schedule-popup-content">
-          ${escapeHtml(post.content || '')}
-        </div>
-      </div>
-    `).join('<div class="schedule-popup-separator"></div>')}
-  `;
+  return (
+    `<div class="schedule-popup-date">${escapeHtml(formatWeeklyDate(firstPost.streamStartAt))}</div>` +
+    entriesHtml
+  );
 }
 
 function getDateKey(value) {
