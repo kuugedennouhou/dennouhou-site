@@ -3,7 +3,6 @@ const SITE_CONFIG_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWy
 let siteConfig = {};
 
 let currentMonthlyDate = new Date();
-let currentMonthlyDateInitialized = false;
 
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
@@ -206,14 +205,7 @@ async function loadMonthlySchedule() {
       return;
     }
 
-    const posts = result.posts || [];
-
-    if (posts.length && !currentMonthlyDateInitialized) {
-      currentMonthlyDate = new Date(posts[0].streamStartAt);
-      currentMonthlyDateInitialized = true;
-    }
-
-    renderMonthlySchedule(posts);
+    renderMonthlySchedule(result.posts || []);
 
   } catch (error) {
     console.error('Monthly schedule load failed:', error);
