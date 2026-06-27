@@ -923,6 +923,31 @@ a:hover {
   font-weight: 700;
 }
 
+.schedule-popup-entry + .schedule-popup-entry {
+  margin-top: 10px;
+}
+
+.schedule-popup-entry-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 4px;
+}
+
+.schedule-popup-time {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.schedule-popup-separator {
+  height: 1px;
+  margin: 10px 0;
+
+  background: rgba(159, 177, 197, 0.14);
+}
+
 /*
 @media (max-width: 640px) {
   .weekly-schedule-main {
