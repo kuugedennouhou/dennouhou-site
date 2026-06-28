@@ -624,10 +624,6 @@ a:hover {
    Schedule
 ========================== */
 
-.schedule-section + .schedule-section {
-  margin-top: 56px;
-}
-
 .schedule-title {
   margin: 0;
 
