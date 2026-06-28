@@ -876,8 +876,10 @@ a:hover {
 .monthly-calendar-title {
   min-width: 72px;
   text-align: center;
-  
   font-size: 1.15rem;
+  
+  position: relative;
+  top: -2px;
 }
 
 .monthly-calendar-nav-button {
