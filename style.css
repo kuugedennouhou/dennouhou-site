@@ -30,10 +30,7 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: -80px;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: -1;
   background:
     radial-gradient(circle at top left, rgba(93, 32, 185, 0.22), transparent 32%),
