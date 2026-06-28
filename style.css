@@ -1005,6 +1005,9 @@ a:hover {
     max-width: none;
     overflow-x: auto;
     padding-bottom: 8px;
+
+    -webkit-overflow-scrolling: touch;
+    
   }
 
   .monthly-calendar-weekdays,
