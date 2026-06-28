@@ -4,6 +4,8 @@ let siteConfig = {};
 
 let currentMonthlyDate = new Date();
 
+let monthlySchedulePosts = [];
+
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
 
@@ -205,7 +207,9 @@ async function loadMonthlySchedule() {
       return;
     }
 
-    renderMonthlySchedule(result.posts || []);
+    monthlySchedulePosts = result.posts || [];
+
+    renderMonthlySchedule(monthlySchedulePosts);
 
   } catch (error) {
     console.error('Monthly schedule load failed:', error);
@@ -1154,7 +1158,7 @@ function initMonthlyCalendarNav() {
 
     currentMonthlyDate.setMonth(currentMonthlyDate.getMonth() + move);
 
-    loadMonthlySchedule();
+    renderMonthlySchedule(monthlySchedulePosts);
   });
 }
 
