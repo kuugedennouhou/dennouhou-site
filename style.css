@@ -72,8 +72,10 @@ a:hover {
   backdrop-filter: blur(12px);
   box-shadow: 0 0 28px rgba(93, 32, 185, 0.18);
 
-  @supports (margin-top: env(safe-area-inset-top)) {
-    margin-top: env(safe-area-inset-top);
+  @supports (padding-top: env(safe-area-inset-top)) {
+    .site {
+      padding-top: calc(24px + env(safe-area-inset-top));
+    }
   }
 }
 
