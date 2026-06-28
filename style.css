@@ -935,6 +935,10 @@ a:hover {
   border-right: 1px solid rgba(159, 177, 197, 0.08);
 }
 
+.monthly-calendar-cell.schedule-detail-trigger {
+  cursor: pointer;
+}
+
 .monthly-calendar-day {
   margin-bottom: 6px;
 
