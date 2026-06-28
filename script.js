@@ -233,7 +233,7 @@ function renderWeeklySchedule(posts) {
       ${posts.map(post => `
         <div
           class="weekly-schedule-item schedule-detail-trigger"
-          data-detail-platform="${escapeHtml(getSchedulePlatformLabel(post))}"
+          data-detail-platform="${escapeHtml(getPlatformLabel(post))}"
           data-detail-date="${escapeHtml(formatScheduleDetailDate(post.streamStartAt))}"
           data-detail-content="${escapeHtml(post.content || '')}"
         >
@@ -246,7 +246,7 @@ function renderWeeklySchedule(posts) {
               ${escapeHtml(formatWeeklyTime(post.streamStartAt))}
             </span>
             <span class="weekly-schedule-platform">
-              ${escapeHtml(getSchedulePlatformLabel(post))}
+              ${escapeHtml(getPlatformLabel(post))}
             </span>
             <span class="weekly-schedule-content">
               ${escapeHtml(post.content || '')}
@@ -375,7 +375,7 @@ function createMonthlyDetailListHtml(dayData) {
     return (
       `<div class="schedule-popup-entry">` +
         `<div class="schedule-popup-entry-head">` +
-          `<span class="schedule-popup-platform schedule-popup-platform-monthly">${escapeHtml(getMonthlyPlatformLabel(post))}</span>` +
+          `<span class="schedule-popup-platform schedule-popup-platform-monthly">${escapeHtml(getPlatformLabel(post))}</span>` +
           `<span class="schedule-popup-time">${escapeHtml(formatWeeklyTime(post.streamStartAt))}～</span>` +
         `</div>` +
         `<div class="schedule-popup-content">${escapeHtml(post.content || '')}</div>` +
@@ -400,7 +400,7 @@ function getDateKey(value) {
 }
 
 function getMonthlyIcon(post) {
-  const label = getMonthlyPlatformLabel(post);
+  const label = getPlatformLabel(post);
   return label.split(' ')[0] || '';
 }
 
@@ -418,30 +418,6 @@ function formatScheduleDetailDate(value) {
     hour: '2-digit',
     minute: '2-digit'
   });
-}
-
-function getMonthlyPlatformLabel(post) {
-  if (post.streamType === 'Twitch') {
-    return '🟣 Twitch';
-  }
-
-  if (post.streamType === 'YouTube') {
-    switch (post.streamContentType) {
-      case 'Live':
-        return '🔴 Live';
-
-      case '動画':
-        return '🎬 Video';
-
-      case 'Shorts':
-        return '📱 Shorts';
-
-      default:
-        return '🔴 YouTube';
-    }
-  }
-
-  return '';
 }
 
 function formatWeeklyDate(value) {
@@ -472,7 +448,7 @@ function formatWeeklyTime(value) {
   });
 }
 
-function getSchedulePlatformLabel(post) {
+function getPlatformLabel(post) {
   if (post.streamType === 'Twitch') {
     return '🟣 Twitch';
   }
