@@ -257,6 +257,7 @@ a:hover {
 
   .hero {
     border-radius: 18px;
+    transform: translateZ(0);
   }
 
   .bio {
