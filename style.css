@@ -252,7 +252,7 @@ a:hover {
 
 @media (max-width: 640px) {
   .site {
-    padding: 14px 12px 48px;
+    padding: calc(env(safe-area-inset-top, 0px) + 14px) 12px 48px;
   }
 
   .hero {
