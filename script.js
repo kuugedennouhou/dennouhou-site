@@ -1072,6 +1072,10 @@ function initSchedulePopup() {
       return;
     }
 
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+    
     const target = event.target.closest('.schedule-detail-trigger');
 
     if (!target) {
@@ -1086,6 +1090,10 @@ function initSchedulePopup() {
       return;
     }
 
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+    
     const target = event.target.closest('.schedule-detail-trigger');
 
     if (!target) {
@@ -1096,6 +1104,10 @@ function initSchedulePopup() {
   }, true);
 
   document.addEventListener('click', event => {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+    
     const target = event.target.closest('.schedule-detail-trigger');
 
     if (!target) {
@@ -1144,6 +1156,10 @@ function initScheduleSwitch() {
 
 function initMonthlyCalendarNav() {
   document.addEventListener('click', event => {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+
     const button = event.target.closest('.monthly-calendar-nav-button');
 
     if (!button) {
