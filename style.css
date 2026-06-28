@@ -268,6 +268,14 @@ a:hover {
   }
 }
 
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 640px) {
+    .hero {
+      margin-top: 25px;
+    }
+  }
+}
+
 .about-divider {
   height: 1px;
   margin: 18px 0;
