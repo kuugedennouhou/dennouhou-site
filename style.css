@@ -268,18 +268,6 @@ a:hover {
   }
 }
 
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 640px) {
-    .hero {
-      transform: translateY(100px);
-    }
-
-    .tabs {
-      margin-top: 120px;
-    }
-  }
-}
-
 .about-divider {
   height: 1px;
   margin: 18px 0;
