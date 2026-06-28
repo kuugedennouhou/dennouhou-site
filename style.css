@@ -71,13 +71,6 @@ a:hover {
   background: var(--card-bg);
   backdrop-filter: blur(12px);
   box-shadow: 0 0 28px rgba(93, 32, 185, 0.18);
-
-/* iPhoneのSafariにおいて、画面上端にセーフエリア分だけの空白を強制する */
-  @supports (padding-top: env(safe-area-inset-top)) {
-    body {
-      padding-top: env(safe-area-inset-top);
-    }
-  }
 }
 
 .hero-image {
