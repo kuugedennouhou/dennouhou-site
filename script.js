@@ -1194,17 +1194,28 @@ function showSchedulePopup(target, event) {
   popup.style.top = `${top}px`;
 }
 
-loadReactions();
-loadPosts();
-loadArchivePosts();
-loadWeeklySchedule();
-loadMonthlySchedule();
+async function initializeSite() {
+  await loadSiteConfig();
 
-initLightbox();
-initImageProtection();
-initReactionPicker();
-initReactionButtons();
-initReadMore();
-initSchedulePopup();
-initScheduleSwitch();
-initMonthlyCalendarNav();
+  await loadAbout();
+
+  await loadReactions();
+
+  await Promise.all([
+    loadPosts(),
+    loadArchivePosts(),
+    loadWeeklySchedule(),
+    loadMonthlySchedule()
+  ]);
+
+  initLightbox();
+  initImageProtection();
+  initReactionPicker();
+  initReactionButtons();
+  initReadMore();
+  initSchedulePopup();
+  initScheduleSwitch();
+  initMonthlyCalendarNav();
+}
+
+initializeSite();
