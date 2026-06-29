@@ -1,4 +1,15 @@
-const SITE_CONFIG_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=siteConfig';
+const API_BASE =
+  'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec';
+
+const API = {
+  siteConfig: `${API_BASE}?mode=siteConfig`,
+  about: `${API_BASE}?mode=about`,
+  posts: `${API_BASE}?mode=posts`,
+  archive: `${API_BASE}?mode=archive`,
+  reactions: `${API_BASE}?mode=reactions`,
+  weeklySchedule: `${API_BASE}?mode=weeklySchedule`,
+  monthlySchedule: `${API_BASE}?mode=monthlySchedule`
+};
 
 let siteConfig = {};
 
@@ -36,7 +47,7 @@ function moveToHash(tabName) {
 
 async function loadSiteConfig() {
   try {
-    const response = await fetch(SITE_CONFIG_API_URL);
+    const response = await fetch(API.siteConfig);
     const result = await response.json();
 
     if (result.status !== 'success') {
@@ -112,11 +123,9 @@ document.querySelectorAll('.accordion-button').forEach(button => {
 activateTab(getCurrentTab());
 loadSiteConfig();
 
-const ABOUT_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=about';
-
 async function loadAbout() {
   try {
-    const response = await fetch(ABOUT_API_URL);
+    const response = await fetch(API.about);
     const result = await response.json();
 
     if (result.status !== 'success') {
@@ -148,22 +157,9 @@ async function loadAbout() {
 
 loadAbout();
 
-const POSTS_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=posts';
-
-const ARCHIVE_API_URL = 'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=archive';
-
-const REACTIONS_API_URL =
-  'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=reactions';
-
-const WEEKLY_SCHEDULE_API_URL =
-  'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=weeklySchedule';
-
-const MONTHLY_SCHEDULE_API_URL =
-  'https://script.google.com/macros/s/AKfycbym6iSXDlWyEDJ0UAof6qPgcrSK8UoYXAtek9VxLkOkg7wwni2c6t4q635s_hCxTHmz/exec?mode=monthlySchedule';
-
 async function loadPosts() {
   try {
-    const response = await fetch(POSTS_API_URL);
+    const response = await fetch(API.posts);
     const result = await response.json();
 
     if (result.status !== 'success') {
@@ -184,7 +180,7 @@ async function loadPosts() {
 
 async function loadWeeklySchedule() {
   try {
-    const response = await fetch(WEEKLY_SCHEDULE_API_URL);
+    const response = await fetch(API.weeklySchedule);
     const result = await response.json();
 
     if (result.status !== 'success') {
@@ -200,7 +196,7 @@ async function loadWeeklySchedule() {
 
 async function loadMonthlySchedule() {
   try {
-    const response = await fetch(MONTHLY_SCHEDULE_API_URL);
+    const response = await fetch(API.monthlySchedule);
     const result = await response.json();
 
     if (result.status !== 'success') {
@@ -478,7 +474,7 @@ const REACTION_EMOJIS = ['🩷', '👀', '✨', '💦', '👍', '🙏', '🤣', 
 
 async function loadReactions() {
   try {
-    const response = await fetch(REACTIONS_API_URL);
+    const response = await fetch(API.reactions);
     const result = await response.json();
 
     if (result.status !== 'success') {
@@ -812,7 +808,7 @@ function getUserId() {
 
 async function addReaction(postId, emoji) {
   try {
-    const response = await fetch(POSTS_API_URL, {
+    const response = await fetch(API.posts, {
       method: 'POST',
       body: JSON.stringify({
         action: 'addReaction',
@@ -839,7 +835,7 @@ async function addReaction(postId, emoji) {
 
 async function loadArchivePosts() {
   try {
-    const response = await fetch(ARCHIVE_API_URL);
+    const response = await fetch(API.archive);
     const result = await response.json();
 
     if (result.status !== 'success') {
