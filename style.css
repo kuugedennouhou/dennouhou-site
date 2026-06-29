@@ -77,8 +77,7 @@ a:hover {
   width: 100%;
   aspect-ratio: 3 / 1;
   background:
-    linear-gradient(135deg, rgba(93, 32, 185, 0.12), rgba(20, 62, 79, 0.12)),
-    url('assets/images/header.webp');
+    linear-gradient(135deg, rgba(93, 32, 185, 0.12), rgba(20, 62, 79, 0.12));
   background-size: cover;
   background-position: center;
 }
