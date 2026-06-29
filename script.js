@@ -61,6 +61,7 @@ async function loadSiteConfig() {
 
     const siteTitle = document.querySelector('.site-title');
     const siteSubtitle = document.querySelector('.site-subtitle');
+    const heroImage = document.querySelector('.hero-image');
 
     document.title = config.siteTitle || '空華電脳幇';
 
@@ -70,6 +71,13 @@ async function loadSiteConfig() {
 
     if (siteSubtitle) {
       siteSubtitle.innerHTML = config.bioHtml || '';
+    }
+
+    if (heroImage && config.headerImageUrl) {
+      heroImage.style.backgroundImage = `
+        linear-gradient(135deg, rgba(93, 32, 185, 0.12), rgba(20, 62, 79, 0.12)),
+        url('${config.headerImageUrl}')
+      `;
     }
 
     const xLink = document.querySelector('[data-social="x"]');
@@ -87,7 +95,7 @@ async function loadSiteConfig() {
     if (youtubeLink && config.youtubeUrl) {
       youtubeLink.href = config.youtubeUrl;
     }
-    
+
     if (config.maintenanceMode === true) {
       document.body.innerHTML = `
         <main class="site">
