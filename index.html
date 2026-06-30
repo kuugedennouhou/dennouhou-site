@@ -184,8 +184,50 @@
       </article>
     </section>
 
-    <section id="archive" class="panel">
-      <div class="empty">Archiveは後で実装します。</div>
+    <section id="archive" class="panel archive-panel">
+      <div class="archive-shell">
+        <p class="archive-note">
+          ※Archiveでは添付画像・リアクションは表示されません。
+        </p>
+
+        <div class="archive-year-row">
+          <select id="archive-year-select" class="archive-year-select">
+            <option value="">Year</option>
+          </select>
+        </div>
+
+        <div class="archive-months" id="archive-months">
+          <button class="archive-month-button" type="button" data-month="1">1月</button>
+          <button class="archive-month-button" type="button" data-month="2">2月</button>
+          <button class="archive-month-button" type="button" data-month="3">3月</button>
+          <button class="archive-month-button" type="button" data-month="4">4月</button>
+          <button class="archive-month-button" type="button" data-month="5">5月</button>
+          <button class="archive-month-button" type="button" data-month="6">6月</button>
+          <button class="archive-month-button" type="button" data-month="7">7月</button>
+          <button class="archive-month-button" type="button" data-month="8">8月</button>
+          <button class="archive-month-button" type="button" data-month="9">9月</button>
+          <button class="archive-month-button" type="button" data-month="10">10月</button>
+          <button class="archive-month-button" type="button" data-month="11">11月</button>
+          <button class="archive-month-button" type="button" data-month="12">12月</button>
+        </div>
+
+        <div class="archive-type-tabs">
+          <button class="archive-type-button active" type="button" data-archive-type="All">All</button>
+          <button class="archive-type-button" type="button" data-archive-type="Post">Post</button>
+          <button class="archive-type-button" type="button" data-archive-type="Notice">Notice</button>
+          <button class="archive-type-button" type="button" data-archive-type="Stream">Stream</button>
+        </div>
+
+        <div class="archive-stream-filters" id="archive-stream-filters" hidden>
+          <button class="archive-stream-button active" type="button" data-stream-filter="All">All</button>
+          <button class="archive-stream-button" type="button" data-stream-filter="Twitch">Twitch</button>
+          <button class="archive-stream-button" type="button" data-stream-filter="YouTube Live">YouTube Live</button>
+          <button class="archive-stream-button" type="button" data-stream-filter="Video">Video</button>
+          <button class="archive-stream-button" type="button" data-stream-filter="Shorts">Shorts</button>
+        </div>
+
+        <div id="archive-list" class="archive-list"></div>
+      </div>
     </section>
   </main>
 
