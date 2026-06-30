@@ -834,7 +834,6 @@ async function addReaction(postId, emoji) {
 
     await loadReactions();
     await loadPosts();
-    await loadArchivePosts();
 
   } catch (error) {
     console.error('Add reaction failed:', error);
@@ -1211,7 +1210,6 @@ async function initializeSite() {
 
   await Promise.all([
     loadPosts(),
-    loadArchivePosts(),
     loadWeeklySchedule(),
     loadMonthlySchedule()
   ]);
