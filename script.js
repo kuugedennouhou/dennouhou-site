@@ -1298,6 +1298,28 @@ function initArchiveMonthButtons() {
   });
 }
 
+function initArchiveTypeButtons() {
+  const typeButtons = document.querySelectorAll('.archive-type-button');
+  const streamFilters = document.getElementById('archive-stream-filters');
+
+  typeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      typeButtons.forEach(item => {
+        item.classList.remove('active');
+      });
+
+      button.classList.add('active');
+      selectedArchiveType = button.dataset.archiveType || 'All';
+
+      if (streamFilters) {
+        streamFilters.hidden = selectedArchiveType !== 'Stream';
+      }
+
+      loadArchivePosts();
+    });
+  });
+}
+
 function showSchedulePopup(target, event) {
   const popup = document.getElementById('schedule-popup');
 
@@ -1366,6 +1388,7 @@ async function initializeSite() {
   initMonthlyCalendarNav();
   initArchiveYearSelect();
   initArchiveMonthButtons();
+  initArchiveTypeButtons();
 }
 
 initializeSite();
