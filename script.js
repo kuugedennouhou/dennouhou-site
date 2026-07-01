@@ -1315,6 +1315,38 @@ function initArchiveTypeButtons() {
         streamFilters.hidden = selectedArchiveType !== 'Stream';
       }
 
+      if (selectedArchiveType !== 'Stream') {
+        selectedArchiveStreamFilters = [];
+
+        document.querySelectorAll('.archive-stream-button').forEach(item => {
+          item.classList.remove('active');
+        });
+      }
+
+      loadArchivePosts();
+    });
+  });
+}
+
+function initArchiveStreamFilters() {
+  const filterButtons = document.querySelectorAll('.archive-stream-button');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.streamFilter;
+
+      if (!filter) {
+        return;
+      }
+
+      if (selectedArchiveStreamFilters.includes(filter)) {
+        selectedArchiveStreamFilters = selectedArchiveStreamFilters.filter(item => item !== filter);
+        button.classList.remove('active');
+      } else {
+        selectedArchiveStreamFilters.push(filter);
+        button.classList.add('active');
+      }
+
       loadArchivePosts();
     });
   });
@@ -1389,6 +1421,7 @@ async function initializeSite() {
   initArchiveYearSelect();
   initArchiveMonthButtons();
   initArchiveTypeButtons();
+  initArchiveStreamFilters();
 }
 
 initializeSite();
