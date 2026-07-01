@@ -1240,6 +1240,10 @@ a:hover {
   margin: 0 0 22px;
 }
 
+.archive-stream-filters[hidden] {
+  display: none;
+}
+
 .archive-card {
   border-left: 1px solid var(--card-border);
 }
