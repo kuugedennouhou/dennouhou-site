@@ -895,8 +895,21 @@ function renderArchiveMonths(year) {
 }
 
 async function loadArchivePosts() {
+  if (!selectedArchiveYear || !selectedArchiveMonth) {
+    document.getElementById('archive-list').innerHTML = '';
+    return;
+  }
+
+  const archiveMonth =
+    `${selectedArchiveYear}-${selectedArchiveMonth}`;
+
+  const url =
+    `${API.archive}` +
+    `&archiveMonth=${encodeURIComponent(archiveMonth)}` +
+    `&type=${encodeURIComponent(selectedArchiveType)}`;
+
   try {
-    const response = await fetch(API.archive);
+    const response = await fetch(url);
     const result = await response.json();
 
     if (result.status !== 'success') {
@@ -1239,6 +1252,8 @@ function initArchiveMonthButtons() {
 
       button.classList.add('active');
       selectedArchiveMonth = String(button.dataset.month).padStart(2, '0');
+
+      loadArchivePosts();
     });
   });
 }
