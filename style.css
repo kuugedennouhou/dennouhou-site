@@ -1064,6 +1064,11 @@ a:hover {
   margin-bottom: 18px;
 }
 
+.archive-year-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .archive-year-select {
   min-width: 98px;
   padding: 7px 20px 7px 14px;
@@ -1080,12 +1085,31 @@ a:hover {
 
   box-shadow: 0 0 10px rgba(63, 203, 255, 0.08);
   cursor: pointer;
+  
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .archive-year-select:focus {
   outline: none;
   border-color: rgba(89, 216, 255, 0.8);
   box-shadow: 0 0 14px rgba(63, 203, 255, 0.28);
+}
+
+.archive-year-icon {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--text);
+
+  font-size: 0.72rem;
+
+  pointer-events: none;
 }
 
 .archive-months {
