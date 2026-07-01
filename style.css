@@ -1177,7 +1177,7 @@ a:hover {
 .archive-type-tabs {
   display: flex;
   justify-content: flex-start;
-  gap: 30px;
+  gap: 20px;
 
   margin: 20px 0 18px;
 }
