@@ -1156,8 +1156,8 @@ a:hover {
 }
 
 .archive-month-button.active {
-  color: #BDEEFF;
-  text-shadow: 0 0 10px rgba(63, 203, 255, 0.55);
+  color: #8EEBFF;
+  text-shadow: 0 0 8px rgba(63, 203, 255, 0.55);
 }
 
 .archive-stream-button.active {
@@ -1240,8 +1240,11 @@ a:hover {
   margin: 0 0 22px;
 }
 
-.archive-list {
-  margin-top: 8px;
+.archive-card {
+  border-left: 1px solid var(--card-border);
+}
 
-  border-top: 1px solid rgba(159, 177, 197, 0.12);
+.archive-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(63, 203, 255, 0.24);
 }
