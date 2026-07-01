@@ -1224,6 +1224,25 @@ function initArchiveYearSelect() {
   });
 }
 
+function initArchiveMonthButtons() {
+  const monthButtons = document.querySelectorAll('.archive-month-button');
+
+  monthButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (button.disabled) {
+        return;
+      }
+
+      monthButtons.forEach(item => {
+        item.classList.remove('active');
+      });
+
+      button.classList.add('active');
+      selectedArchiveMonth = String(button.dataset.month).padStart(2, '0');
+    });
+  });
+}
+
 function showSchedulePopup(target, event) {
   const popup = document.getElementById('schedule-popup');
 
@@ -1291,6 +1310,7 @@ async function initializeSite() {
   initScheduleSwitch();
   initMonthlyCalendarNav();
   initArchiveYearSelect();
+  initArchiveMonthButtons();
 }
 
 initializeSite();
