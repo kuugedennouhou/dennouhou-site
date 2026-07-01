@@ -1092,7 +1092,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 10px 10px;
+  gap: 10px 11px;
 
   margin-bottom: 22px;
 }
