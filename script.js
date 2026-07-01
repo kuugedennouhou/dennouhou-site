@@ -932,6 +932,7 @@ async function loadArchivePosts() {
     archiveCachedMonth = archiveMonth;
     archiveCachedPosts = result.posts || [];
 
+    updateArchiveFilterButtons();
     renderFilteredArchivePosts();
 
   } catch (error) {
@@ -986,6 +987,72 @@ function renderFilteredArchivePosts() {
   }
 
   renderArchivePosts(posts);
+}
+
+function updateArchiveFilterButtons() {
+
+  const typeButtons = document.querySelectorAll('.archive-type-button');
+
+  typeButtons.forEach(button => {
+
+    const type = button.dataset.archiveType;
+
+    if (type === 'All') {
+      button.disabled = false;
+      return;
+    }
+
+    const exists = archiveCachedPosts.some(post => post.tabType === type);
+
+    button.disabled = !exists;
+
+  });
+
+  const streamButtons = document.querySelectorAll('.archive-stream-button');
+
+  streamButtons.forEach(button => {
+
+    const filter = button.dataset.streamFilter;
+
+    const exists = archiveCachedPosts.some(post => {
+
+      switch (filter) {
+
+        case 'Twitch':
+          return post.streamType === 'Twitch';
+
+        case 'YouTube Live':
+          return (
+            post.streamType === 'YouTube' &&
+            post.streamContentType === 'Live'
+          );
+
+        case 'Video':
+          return (
+            post.streamType === 'YouTube' &&
+            (
+              post.streamContentType === '動画' ||
+              post.streamContentType === 'Video'
+            )
+          );
+
+        case 'Shorts':
+          return (
+            post.streamType === 'YouTube' &&
+            post.streamContentType === 'Shorts'
+          );
+
+        default:
+          return false;
+
+      }
+
+    });
+
+    button.disabled = !exists;
+
+  });
+
 }
 
 function renderArchivePosts(posts) {
