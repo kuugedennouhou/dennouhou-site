@@ -904,6 +904,11 @@ function renderArchiveMonths(year) {
   selectedArchiveMonth = '';
 }
 
+function clearArchiveCache() {
+  archiveCachedMonth = '';
+  archiveCachedPosts = [];
+}
+
 async function loadArchivePosts() {
   const archiveList = document.getElementById('archive-list');
 
@@ -1378,6 +1383,9 @@ function initArchiveYearSelect() {
 
   select.addEventListener('change', () => {
     selectedArchiveYear = select.value;
+
+    clearArchiveCache();
+
     renderArchiveMonths(selectedArchiveYear);
   });
 }
