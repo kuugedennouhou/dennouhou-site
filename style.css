@@ -1065,7 +1065,7 @@ a:hover {
 }
 
 .archive-year-select {
-  min-width: 100px;
+  min-width: 98px;
   padding: 7px 32px 7px 14px;
 
   border: 1px solid rgba(63, 203, 255, 0.32);
