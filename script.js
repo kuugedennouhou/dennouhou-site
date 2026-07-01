@@ -23,6 +23,8 @@ let selectedArchiveYear = '';
 let selectedArchiveMonth = '';
 let selectedArchiveType = 'All';
 let selectedArchiveStreamFilters = [];
+let archiveCachedMonth = '';
+let archiveCachedPosts = [];
 
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
@@ -909,11 +911,15 @@ async function loadArchivePosts() {
   const archiveMonth =
     `${selectedArchiveYear}-${selectedArchiveMonth}`;
 
+  if (archiveCachedMonth === archiveMonth) {
+    renderFilteredArchivePosts();
+    return;
+  }
+
   const url =
     `${API.archive}` +
     `&archiveMonth=${encodeURIComponent(archiveMonth)}` +
-    `&type=${encodeURIComponent(selectedArchiveType)}` +
-    `&filters=${encodeURIComponent(selectedArchiveStreamFilters.join(','))}`;
+    `&type=All`;
 
   try {
     const response = await fetch(url);
@@ -923,11 +929,63 @@ async function loadArchivePosts() {
       return;
     }
 
-    renderArchivePosts(result.posts || []);
+    archiveCachedMonth = archiveMonth;
+    archiveCachedPosts = result.posts || [];
+
+    renderFilteredArchivePosts();
 
   } catch (error) {
     console.error('Archive load failed:', error);
   }
+}
+
+function renderFilteredArchivePosts() {
+  let posts = archiveCachedPosts;
+
+  if (selectedArchiveType !== 'All') {
+    posts = posts.filter(post => post.tabType === selectedArchiveType);
+  }
+
+  if (
+    selectedArchiveType === 'Stream' &&
+    selectedArchiveStreamFilters.length
+  ) {
+    posts = posts.filter(post => {
+      return selectedArchiveStreamFilters.some(filter => {
+        if (filter === 'Twitch') {
+          return post.streamType === 'Twitch';
+        }
+
+        if (filter === 'YouTube Live') {
+          return (
+            post.streamType === 'YouTube' &&
+            post.streamContentType === 'Live'
+          );
+        }
+
+        if (filter === 'Video') {
+          return (
+            post.streamType === 'YouTube' &&
+            (
+              post.streamContentType === '動画' ||
+              post.streamContentType === 'Video'
+            )
+          );
+        }
+
+        if (filter === 'Shorts') {
+          return (
+            post.streamType === 'YouTube' &&
+            post.streamContentType === 'Shorts'
+          );
+        }
+
+        return false;
+      });
+    });
+  }
+
+  renderArchivePosts(posts);
 }
 
 function renderArchivePosts(posts) {
