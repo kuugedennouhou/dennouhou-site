@@ -940,6 +940,37 @@ async function loadArchivePosts() {
   }
 }
 
+function matchesArchiveStreamFilter(post, filter) {
+  switch (filter) {
+    case 'Twitch':
+      return post.streamType === 'Twitch';
+
+    case 'YouTube Live':
+      return (
+        post.streamType === 'YouTube' &&
+        post.streamContentType === 'Live'
+      );
+
+    case 'Video':
+      return (
+        post.streamType === 'YouTube' &&
+        (
+          post.streamContentType === '動画' ||
+          post.streamContentType === 'Video'
+        )
+      );
+
+    case 'Shorts':
+      return (
+        post.streamType === 'YouTube' &&
+        post.streamContentType === 'Shorts'
+      );
+
+    default:
+      return false;
+  }
+}
+
 function renderFilteredArchivePosts() {
   let posts = archiveCachedPosts;
 
@@ -952,37 +983,9 @@ function renderFilteredArchivePosts() {
     selectedArchiveStreamFilters.length
   ) {
     posts = posts.filter(post => {
-      return selectedArchiveStreamFilters.some(filter => {
-        if (filter === 'Twitch') {
-          return post.streamType === 'Twitch';
-        }
-
-        if (filter === 'YouTube Live') {
-          return (
-            post.streamType === 'YouTube' &&
-            post.streamContentType === 'Live'
-          );
-        }
-
-        if (filter === 'Video') {
-          return (
-            post.streamType === 'YouTube' &&
-            (
-              post.streamContentType === '動画' ||
-              post.streamContentType === 'Video'
-            )
-          );
-        }
-
-        if (filter === 'Shorts') {
-          return (
-            post.streamType === 'YouTube' &&
-            post.streamContentType === 'Shorts'
-          );
-        }
-
-        return false;
-      });
+      return selectedArchiveStreamFilters.some(filter =>
+        matchesArchiveStreamFilter(post, filter)
+      );
     });
   }
 
@@ -1013,40 +1016,9 @@ function updateArchiveFilterButtons() {
 
     const filter = button.dataset.streamFilter;
 
-    const exists = archiveCachedPosts.some(post => {
-
-      switch (filter) {
-
-        case 'Twitch':
-          return post.streamType === 'Twitch';
-
-        case 'YouTube Live':
-          return (
-            post.streamType === 'YouTube' &&
-            post.streamContentType === 'Live'
-          );
-
-        case 'Video':
-          return (
-            post.streamType === 'YouTube' &&
-            (
-              post.streamContentType === '動画' ||
-              post.streamContentType === 'Video'
-            )
-          );
-
-        case 'Shorts':
-          return (
-            post.streamType === 'YouTube' &&
-            post.streamContentType === 'Shorts'
-          );
-
-        default:
-          return false;
-
-      }
-
-    });
+    const exists = archiveCachedPosts.some(post =>
+      matchesArchiveStreamFilter(post, filter)
+    );
 
     button.disabled = !exists;
 
