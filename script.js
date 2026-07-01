@@ -997,14 +997,13 @@ function updateArchiveFilterButtons() {
 
     const type = button.dataset.archiveType;
 
-    if (type === 'All') {
-      button.disabled = false;
-      return;
+    if (type !== 'All') {
+
+      const exists = archiveCachedPosts.some(post => post.tabType === type);
+
+      button.disabled = !exists;
+
     }
-
-    const exists = archiveCachedPosts.some(post => post.tabType === type);
-
-    button.disabled = !exists;
 
   });
 
