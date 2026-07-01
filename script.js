@@ -874,6 +874,14 @@ async function loadArchiveIndex() {
       option.textContent = item.year;
       select.appendChild(option);
     });
+    
+    const currentYear = String(new Date().getFullYear());
+
+    if (archiveIndexData.some(item => String(item.year) === currentYear)) {
+      select.value = currentYear;
+      selectedArchiveYear = currentYear;
+      renderArchiveMonths(currentYear);
+    }
 
   } catch (error) {
     console.error('Archive index load failed:', error);
