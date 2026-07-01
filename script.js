@@ -912,7 +912,8 @@ async function loadArchivePosts() {
   const url =
     `${API.archive}` +
     `&archiveMonth=${encodeURIComponent(archiveMonth)}` +
-    `&type=${encodeURIComponent(selectedArchiveType)}`;
+    `&type=${encodeURIComponent(selectedArchiveType)}` +
+    `&filters=${encodeURIComponent(selectedArchiveStreamFilters.join(','))}`;
 
   try {
     const response = await fetch(url);
