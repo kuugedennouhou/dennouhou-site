@@ -1198,6 +1198,23 @@ a:hover {
   box-shadow: none;
 }
 
+.archive-type-button:disabled,
+.archive-stream-button:disabled {
+
+  opacity: 0.32;
+
+  cursor: not-allowed;
+
+  pointer-events: none;
+
+  transform: none;
+
+  box-shadow: none;
+
+  text-shadow: none;
+
+}
+
 .archive-type-tabs {
   display: flex;
   justify-content: flex-start;
