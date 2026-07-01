@@ -895,8 +895,14 @@ function renderArchiveMonths(year) {
 }
 
 async function loadArchivePosts() {
+  const archiveList = document.getElementById('archive-list');
+
+  if (!archiveList) {
+    return;
+  }
+
   if (!selectedArchiveYear || !selectedArchiveMonth) {
-    document.getElementById('archive-list').innerHTML = '';
+    archiveList.innerHTML = '';
     return;
   }
 
@@ -916,11 +922,45 @@ async function loadArchivePosts() {
       return;
     }
 
-    renderPostsToPanel('archive', result.posts || [], false);
+    renderArchivePosts(result.posts || []);
 
   } catch (error) {
     console.error('Archive load failed:', error);
   }
+}
+
+function renderArchivePosts(posts) {
+  const archiveList = document.getElementById('archive-list');
+
+  if (!archiveList) {
+    return;
+  }
+
+  archiveList.innerHTML = '';
+
+  if (!posts.length) {
+    archiveList.innerHTML = '<div class="empty">投稿はまだありません。</div>';
+    return;
+  }
+
+  posts.forEach(post => {
+    const card = createPostCard(post, false);
+
+    card.classList.add('archive-card');
+
+    const images = card.querySelector('.post-images');
+    const reactions = card.querySelector('.reactions');
+
+    if (images) {
+      images.remove();
+    }
+
+    if (reactions) {
+      reactions.remove();
+    }
+
+    archiveList.appendChild(card);
+  });
 }
 
 function initLightbox() {
