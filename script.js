@@ -5,6 +5,7 @@ const API = {
   siteConfig: `${API_BASE}?mode=siteConfig`,
   about: `${API_BASE}?mode=about`,
   posts: `${API_BASE}?mode=posts`,
+  archiveIndex: `${API_BASE}?mode=archiveIndex`,
   archive: `${API_BASE}?mode=archive`,
   reactions: `${API_BASE}?mode=reactions`,
   weeklySchedule: `${API_BASE}?mode=weeklySchedule`,
@@ -16,6 +17,12 @@ let siteConfig = {};
 let currentMonthlyDate = new Date();
 
 let monthlySchedulePosts = [];
+
+let archiveIndexData = [];
+let selectedArchiveYear = '';
+let selectedArchiveMonth = '';
+let selectedArchiveType = 'All';
+let selectedArchiveStreamFilters = [];
 
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
@@ -840,6 +847,53 @@ async function addReaction(postId, emoji) {
   }
 }
 
+async function loadArchiveIndex() {
+  try {
+    const response = await fetch(API.archiveIndex);
+    const result = await response.json();
+
+    if (result.status !== 'success') {
+      return;
+    }
+
+    archiveIndexData = result.years || [];
+
+    const select = document.getElementById('archive-year-select');
+
+    if (!select) {
+      return;
+    }
+
+    select.innerHTML = '<option value="">Year</option>';
+
+    archiveIndexData.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.year;
+      option.textContent = item.year;
+      select.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error('Archive index load failed:', error);
+  }
+}
+
+function renderArchiveMonths(year) {
+  const monthButtons = document.querySelectorAll('.archive-month-button');
+  const yearData = archiveIndexData.find(item => String(item.year) === String(year));
+  const activeMonths = yearData ? yearData.months : [];
+
+  monthButtons.forEach(button => {
+    const month = Number(button.dataset.month);
+    const isActive = activeMonths.includes(month);
+
+    button.disabled = !isActive;
+    button.classList.remove('active');
+  });
+
+  selectedArchiveMonth = '';
+}
+
 async function loadArchivePosts() {
   try {
     const response = await fetch(API.archive);
@@ -1157,6 +1211,19 @@ function initMonthlyCalendarNav() {
   });
 }
 
+function initArchiveYearSelect() {
+  const select = document.getElementById('archive-year-select');
+
+  if (!select) {
+    return;
+  }
+
+  select.addEventListener('change', () => {
+    selectedArchiveYear = select.value;
+    renderArchiveMonths(selectedArchiveYear);
+  });
+}
+
 function showSchedulePopup(target, event) {
   const popup = document.getElementById('schedule-popup');
 
@@ -1211,7 +1278,8 @@ async function initializeSite() {
   await Promise.all([
     loadPosts(),
     loadWeeklySchedule(),
-    loadMonthlySchedule()
+    loadMonthlySchedule(),
+    loadArchiveIndex()
   ]);
 
   initLightbox();
@@ -1222,6 +1290,7 @@ async function initializeSite() {
   initSchedulePopup();
   initScheduleSwitch();
   initMonthlyCalendarNav();
+  initArchiveYearSelect();
 }
 
 initializeSite();
