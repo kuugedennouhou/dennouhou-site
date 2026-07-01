@@ -1064,7 +1064,7 @@ function renderArchivePosts(posts) {
   archiveList.innerHTML = '';
 
   if (!posts.length) {
-    archiveList.innerHTML = '<div class="empty">投稿はまだありません。</div>';
+    archiveList.innerHTML = '<div class="empty">投稿はありません。</div>';
     return;
   }
 
