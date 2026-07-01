@@ -620,6 +620,25 @@ a:hover {
 }
 
 /* ==========================
+   Shared underline
+========================== */
+
+.schedule-switch-button::after,
+.archive-type-button::after {
+  content: "";
+
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  width: 0;
+  height: 2px;
+
+  transform: translateX(-50%);
+  transition: width 0.18s ease;
+}
+
+/* ==========================
    Schedule
 ========================== */
 
@@ -690,15 +709,6 @@ a:hover {
 }
 
 .schedule-switch-button::after {
-  content: "";
-
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-
-  width: 0;
-  height: 2px;
-
   background: linear-gradient(
     90deg,
     rgba(93, 32, 185, 0.2),
@@ -708,9 +718,6 @@ a:hover {
   );
 
   box-shadow: 0 0 10px rgba(93, 32, 185, 0.45);
-
-  transform: translateX(-50%);
-  transition: width 0.18s ease;
 }
 
 .schedule-switch-button.active {
@@ -1242,15 +1249,6 @@ a:hover {
 }
 
 .archive-type-button::after {
-  content: "";
-
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-
-  width: 0;
-  height: 2px;
-
   background: linear-gradient(
     90deg,
     rgba(63, 203, 255, 0.2),
@@ -1259,9 +1257,6 @@ a:hover {
   );
 
   box-shadow: 0 0 10px rgba(63, 203, 255, 0.45);
-
-  transform: translateX(-50%);
-  transition: width 0.18s ease;
 }
 
 .archive-type-button.active {
